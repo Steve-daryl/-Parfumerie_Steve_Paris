@@ -1,0 +1,31 @@
+parfums-de-jojo/
+├── index.php                 # Page d'accueil
+├── boutique.php             # Page catalogue
+├── produit.php              # Détail produit
+├── config/
+│   ├── database.php         # Configuration BDD
+│   └── config.php           # Configuration générale
+├── includes/
+│   ├── header.php           # En-tête
+│   ├── footer.php           # Pied de page
+│   └── functions.php        # Fonctions utilitaires
+├── admin/
+│   ├── index.php            # Dashboard principal
+│   ├── login.php            # Connexion admin
+│   ├── produits.php         # Gestion produits
+│   ├── commandes.php        # Gestion commandes
+│   ├── categories.php       # Gestion catégories
+│   └── logout.php           # Déconnexion
+├── assets/
+│   ├── css/
+│   │   ├── style.css        # Styles frontend
+│   │   └── admin.css        # Styles dashboard
+│   ├── js/
+│   │   ├── main.js          # Scripts frontend
+│   │   └── admin.js         # Scripts dashboard
+│   └── images/
+│       └── uploads/         # Images produits
+├── api/
+│   ├── products.php         # API produits
+│   └── orders.php           # API commandes
+└── database.sql             # Structure BDD
