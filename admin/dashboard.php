@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboard | Steve Paris</title>
 </head>
 <body>
-    <input href="../admin/logout.php" type="button" value="Se deconnecter">
+    <h1>Bienvenue sur le Dashboard de l'administration</h1>
+    <a href="logout.php">Deconnexion</a>
 </body>
 </html>
