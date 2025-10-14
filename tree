@@ -15,7 +15,8 @@ parfums-de-jojo/
 │   ├── produits.php         # Gestion produits
 │   ├── commandes.php        # Gestion commandes
 │   ├── categories.php       # Gestion catégories
-│   └── logout.php           # Déconnexion
+│   ├── logout.php           # DÉCONNEXION
+|   └── Dashboard.php        # Tableau de bord
 ├── assets/
 │   ├── css/
 │   │   ├── style.css        # Styles frontend
