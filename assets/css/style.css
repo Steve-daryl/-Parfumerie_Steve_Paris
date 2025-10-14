@@ -1,0 +1,373 @@
+/* =================================================================
+   Feuille de style principale - Parfumerie Steve Paris
+   Approche : Mobile First (Styles par défaut pour mobile)
+   ================================================================= */
+
+/* -----------------------------------------------------------------
+   1. Variables et Styles Globaux
+   ----------------------------------------------------------------- */
+
+:root {
+    --color-background: #fdfcf8;
+    --color-primary: #f0ead6;
+    --color-accent: #cda434;
+    --color-green: #25D366;
+    --color-dark: #222222;
+    --color-text: #444444;
+    --color-light: #ffffff;
+    --font-title: 'Playfair Display', serif;
+    --font-body: 'Roboto', sans-serif;
+    --container-width: 1200px;
+    --header-height: 70px; /* Hauteur ajustée pour mobile */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--color-text);
+    background-color: var(--color-background);
+    line-height: 1.7;
+}
+
+.container {
+    max-width: var(--container-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+a {
+    color: var(--color-accent);
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* -----------------------------------------------------------------
+   2. En-tête (Header) - Mobile
+   ----------------------------------------------------------------- */
+
+.main-header {
+    background-color: rgba(253, 252, 248, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 0 20px;
+    height: var(--header-height);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #eee;
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    color: var(--color-dark);
+}
+
+.logo {
+    height: 35px; /* Logo plus petit sur mobile */
+    margin-right: 10px;
+}
+
+.logo-text {
+    font-family: var(--font-title);
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* Le menu de navigation est caché par défaut sur mobile */
+.main-nav {
+    display: none;
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.header-icons img {
+    height: 22px;
+}
+
+/* Style du bouton Hamburger (visible sur mobile) */
+.menu-toggle {
+    display: block; /* Affiché par défaut */
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+}
+.menu-toggle .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--color-dark);
+    margin: 5px 0;
+    transition: all 0.3s ease-in-out;
+}
+
+/* -----------------------------------------------------------------
+   3. Section Héros - Mobile
+   ----------------------------------------------------------------- */
+
+.hero {
+    /* Fond simple sur mobile */
+    background-color: var(--color-primary);
+    padding: 40px 0;
+}
+
+.hero .container {
+    display: flex;
+    flex-direction: column; /* Les éléments s'empilent verticalement */
+    gap: 40px;
+}
+
+.hero-content {
+    text-align: center; /* Texte centré sur mobile */
+}
+
+.hero-title {
+    font-family: var(--font-title);
+    font-size: 48px; /* Titre plus petit */
+    font-weight: 400;
+    color: var(--color-dark);
+    line-height: 1.2;
+    margin-bottom: 15px;
+}
+
+.hero-title .luxe {
+    color: var(--color-accent);
+    font-weight: 700;
+}
+
+.hero-subtitle {
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.hero-actions {
+    display: flex;
+    flex-direction: column; /* Boutons empilés */
+    gap: 15px;
+    align-items: center;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    gap: 10px;
+    width: 100%;
+    max-width: 300px;
+}
+.btn img { height: 18px; }
+
+.btn-primary {
+    background-color: var(--color-accent);
+    color: var(--color-light);
+}
+.btn-secondary {
+    background-color: var(--color-green);
+    color: var(--color-light);
+}
+
+.hero-images {
+    display: flex;
+    flex-direction: column; /* Images empilées */
+    gap: 20px;
+}
+.hero-image {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* -----------------------------------------------------------------
+   4. Section "Pourquoi nous choisir ?" - Mobile
+   ----------------------------------------------------------------- */
+
+.features {
+    padding: 60px 0;
+    text-align: center;
+}
+.section-title {
+    font-family: var(--font-title);
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+.section-subtitle {
+    font-size: 16px;
+    margin-bottom: 40px;
+}
+.features-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Une seule colonne */
+    gap: 30px;
+}
+.feature-item {
+    background-color: #fffaf0;
+    padding: 40px 20px;
+    border-radius: 16px;
+    border: 1px solid #f0e5d1;
+}
+
+/* -----------------------------------------------------------------
+   5. Pied de Page (Footer) - Mobile
+   ----------------------------------------------------------------- */
+
+.main-footer {
+    background-color: var(--color-dark);
+    color: #aab;
+    padding: 40px 0;
+    margin-top: 40px;
+}
+.main-footer .container {
+    display: flex;
+    flex-direction: column; /* Empilé */
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+}
+.footer-nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.footer-nav a {
+    color: #ccc;
+}
+
+
+/* =================================================================
+   STYLES POUR LES ÉCRANS LARGES (Tablettes et PC)
+   La media query applique ces styles si la largeur de l'écran
+   est de 992px ou plus.
+   ================================================================= */
+
+@media (min-width: 992px) {
+
+    :root {
+        --header-height: 80px; /* On redonne la bonne hauteur */
+    }
+
+    /* --- Header Desktop --- */
+    .logo { height: 45px; }
+    .logo-text { font-size: 24px; }
+    
+    .menu-toggle { display: none; } /* On cache le hamburger */
+
+    .main-nav {
+        display: block; /* On affiche la navigation principale */
+    }
+    .main-nav ul {
+        list-style: none;
+        display: flex;
+        gap: 35px;
+    }
+    .main-nav a {
+        color: var(--color-text);
+        font-weight: 500;
+        padding: 10px 0;
+        border-bottom: 2px solid transparent;
+        transition: color 0.3s ease, border-color 0.3s ease;
+    }
+    .main-nav a.active,
+    .main-nav a:hover {
+        color: var(--color-dark);
+        border-bottom-color: var(--color-accent);
+    }
+    .header-icons { gap: 25px; }
+    .header-icons img { height: 24px; }
+
+
+    /* --- Hero Desktop --- */
+    .hero {
+        background: linear-gradient(to right, var(--color-background) 55%, var(--color-primary) 45%);
+        padding: 80px 0;
+        min-height: calc(100vh - var(--header-height));
+    }
+    .hero .container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+        gap: 60px;
+    }
+    .hero-content { text-align: left; }
+    .hero-title { font-size: 72px; }
+    .hero-subtitle { font-size: 18px; margin-bottom: 40px; }
+    .hero-actions {
+        flex-direction: row; /* Boutons côte à côte */
+        justify-content: flex-start;
+    }
+    .btn { width: auto; }
+    .hero-images {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        gap: 20px;
+        height: 500px;
+    }
+    .hero-image {
+        width: 100%;
+        height: 100%;
+    }
+    .hero-image-1 { grid-area: 1 / 1 / 5 / 4; }
+    .hero-image-2 { grid-area: 1 / 4 / 3 / 6; }
+    .hero-image-3 { grid-area: 3 / 4 / 5 / 6; }
+
+
+    /* --- Features Desktop --- */
+    .features { padding: 100px 0; }
+    .section-title { font-size: 48px; }
+    .section-subtitle { font-size: 18px; margin-bottom: 60px; }
+    .features-grid {
+        grid-template-columns: repeat(3, 1fr); /* Grille à 3 colonnes */
+        gap: 40px;
+    }
+    .feature-item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.07);
+    }
+
+
+    /* --- Footer Desktop --- */
+    .main-footer .container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .footer-nav ul {
+        flex-direction: row;
+        gap: 25px;
+    }
+}
