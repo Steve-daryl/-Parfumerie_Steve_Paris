@@ -19,6 +19,7 @@ parfums-de-jojo/
 |   └── Dashboard.php        # Tableau de bord
 ├── assets/
 │   ├── css/
+│   │   ├── login_admin.css  # Style de la page de connexion
 │   │   ├── style.css        # Styles frontend
 │   │   └── admin.css        # Styles dashboard
 │   ├── js/
