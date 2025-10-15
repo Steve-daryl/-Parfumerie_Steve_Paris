@@ -1,104 +1,84 @@
 <?php
-
-/**
- * Page d'accueil du site Parfumerie Steve Paris.
- * Affiche la section "héros" et les points forts de la boutique.
- */
-
-// On inclut l'en-tête de la page
 require_once __DIR__ . '/includes/header.php';
 
-// --- Récupération des données pour la page ---
 try {
-    // Récupérer le numéro WhatsApp depuis les paramètres chargés dans le header
-    // $whatsapp_number = $params['whatsapp_numero'] ?? '';
+    // Lien WhatsApp
     $whatsapp_number = $params['whatsapp_numero'] ?? '';
-    $whatsapp_link = "https://wa.me/" . preg_replace('/[^0-9]/', '', $whatsapp_number) . "?text=Bonjour, j'aimerais en savoir plus sur vos parfums de luxe.";
-    // $whatsapp_link = "https://wa.me/237690984758?text=Bonjour, j'aimerais en savoir plus sur vos parfums de luxe.";
+    $whatsapp_link = "https://wa.me/" . preg_replace('/[^0-9]/', '', $whatsapp_number) .
+        "?text=Bonjour, j'aimerais en savoir plus sur vos parfums de luxe.";
 
-    // Récupérer les 3 produits à mettre en avant sur la page d'accueil
-    $stmt_products = $pdo->prepare(
-        "SELECT id, nom, image FROM produits WHERE actif = 1 ORDER BY id DESC LIMIT 3"
-    );
+    // 3 produits pour la section héros
+    $stmt_products = $pdo->prepare("SELECT id, nom, image FROM produits WHERE actif = 1 ORDER BY id DESC LIMIT 3");
     $stmt_products->execute();
     $featured_products = $stmt_products->fetchAll(PDO::FETCH_ASSOC);
 } catch (\PDOException $e) {
     error_log("Erreur sur la page d'accueil : " . $e->getMessage());
     $featured_products = [];
+    $whatsapp_link = '#';
 }
-// echo '<pre>';
-// print_r($featured_products);
-// echo '</pre>';
 
-// ====================================================================================
-// SECTION IMPORTANTE : ASSIGNATION DES IMAGES
-//
-// Le code ci-dessous prend les noms de fichiers récupérés de la base de données
-// (ex: 'perfum (1).jpeg') et construit l'URL complète pour l'afficher.
-// La constante UPLOADS_URL vient de config.php et vaut :
-// 'http://localhost/Parfumerie_Steve_Paris/assets/images/uploads/'
-// Le résultat final sera donc, par exemple :
-// 'http://localhost/Parfumerie_Steve_Paris/assets/images/uploads/perfum (1).jpeg'
-// ====================================================================================
-
-$img1 = !empty($featured_products[0]['image']) ? UPLOADS_URL . e($featured_products[0]['image']) : IMAGES_PATH . 'perfum.jpeg';
-$img2 = !empty($featured_products[1]['image']) ? UPLOADS_URL . e($featured_products[1]['image']) : IMAGES_PATH . 'perfum.jpeg';
-$img3 = !empty($featured_products[2]['image']) ? UPLOADS_URL . e($featured_products[2]['image']) : IMAGES_PATH . 'perfum.jpeg';
-// echo $img3;
+// Assignation des images pour la grille de la section héros avec des images de secours
+$img1 = !empty($featured_products[0]['image']) ? UPLOADS_URL . e($featured_products[0]['image']) : 'https://images.unsplash.com/photo-1680503504111-1bbc7fc2103e?q=85';
+$img2 = !empty($featured_products[1]['image']) ? UPLOADS_URL . e($featured_products[1]['image']) : 'https://images.unsplash.com/photo-1615160460367-dcccd27e11ad?q=85';
+$img3 = !empty($featured_products[2]['image']) ? UPLOADS_URL . e($featured_products[2]['image']) : 'https://images.unsplash.com/photo-1724732678052-1437962cbbab?q=85';
 ?>
 
-<!-- Section Héros -->
-<section class="hero">
-    <div class="container">
-        <div class="hero-content">
-            <h1 class="hero-title">Parfums de <span class="luxe">Luxe</span></h1>
-            <p class="hero-subtitle">
-                Découvrez notre collection exclusive de parfums haute couture.
-                Des parfums d'exception pour des moments inoubliables.
+<!-- ===== SECTION HÉROS MODERNISÉE ===== -->
+<section class="hero-v2">
+    <div class="container hero-v2-container">
+        <div class="hero-v2-content">
+            <h1 class="hero-v2-title">
+                Parfums de <span class="hero-v2-highlight">Luxe</span>
+            </h1>
+            <p class="hero-v2-subtitle">
+                Découvrez notre collection exclusive de parfums haute couture. Des parfums d'exception pour des moments inoubliables.
             </p>
-            <div class="hero-actions">
-                <a href="boutique.php" class="btn btn-primary">
-                    <img src="<?php echo IMAGES_PATH; ?>cart-icon.svg" alt="">
+            <div class="hero-v2-actions">
+                <a href="boutique.php" class="btn btn-hero-primary">
                     Découvrir la Boutique
                 </a>
-                <a href="<?php echo $whatsapp_link; ?>" target="_blank" class="btn btn-secondary">
-                    <img src="<?php echo IMAGES_PATH; ?>whatsapp-icon.svg" alt="">
-                    Contactez WhatsApp
+                <a href="<?php echo $whatsapp_link; ?>" target="_blank" class="btn btn-hero-secondary">
+                    Contactez-nous
                 </a>
             </div>
         </div>
-        <div class="hero-images">
-            <!-- Les balises img utilisent maintenant les bonnes URLs construites juste au-dessus -->
-            <div class="hero-image hero-image-1"><img src="<?php echo $img1; ?>" alt="Parfum de luxe 1"></div>
-            <div class="hero-image hero-image-2"><img src="<?php echo $img2; ?>" alt="Parfum de luxe 2"></div>
-            <div class="hero-image hero-image-3"><img src="<?php echo $img3; ?>" alt="Parfum de luxe 3"></div>
+        <div class="hero-v2-images">
+            <div class="hero-v2-images-col1">
+                <img src="<?php echo $img1; ?>" alt="Parfum de luxe 1" class="hero-img-1">
+                <img src="<?php echo $img2; ?>" alt="Collection de parfums 2" class="hero-img-2">
+            </div>
+            <div class="hero-v2-images-col2">
+                <img src="<?php echo $img3; ?>" alt="Parfums élégants 3" class="hero-img-3">
+            </div>
         </div>
     </div>
 </section>
 
-<!-- Section "Pourquoi nous choisir ?" -->
-<section class="features">
+<!-- ===== SECTION "POURQUOI NOUS CHOISIR" MODERNISÉE ===== -->
+<section class="features-v2">
     <div class="container">
-        <h2 class="section-title">Pourquoi Choisir Parfumerie Steve Paris ?</h2>
-        <p class="section-subtitle">Une expérience unique dans l'univers des parfums de luxe</p>
-        <div class="features-grid">
-            <div class="feature-item">
-                <div class="feature-icon">
-                    <img src="<?php echo IMAGES_PATH; ?>perfume-bottle.svg" alt="Icone Parfum">
+        <div class="section-header">
+            <h2 class="section-title">Pourquoi Choisir Steve Paris ?</h2>
+            <p class="section-subtitle">Une expérience unique dans l'univers des parfums de luxe</p>
+        </div>
+        <div class="features-v2-grid">
+            <div class="feature-v2-item">
+                <div class="feature-v2-icon-wrapper">
+                    <img src="<?php echo IMAGES_PATH; ?>perfume-bottle.svg" alt="Icône Parfum">
                 </div>
                 <h3>Parfums de Luxe</h3>
-                <p>Collection exclusive des plus grandes marques : Dior, Chanel, Guerlain et bien plus.</p>
+                <p>Collection exclusive des plus grandes marques : Dior, Chanel, Baccarat rouge et bien plus.</p>
             </div>
-            <div class="feature-item">
-                <div class="feature-icon">
-                    <img src="<?php echo IMAGES_PATH; ?>star.svg" alt="Icone Etoile">
+            <div class="feature-v2-item">
+                <div class="feature-v2-icon-wrapper">
+                    <img src="<?php echo IMAGES_PATH; ?>star.svg" alt="Icône Étoile">
                 </div>
                 <h3>Qualité Garantie</h3>
                 <p>Tous nos produits sont authentiques avec traçabilité complète et dates d'expiration contrôlées.</p>
             </div>
-            <div class="feature-item">
-                <div class="feature-icon">
-                    <img src="<?php echo IMAGES_PATH; ?>whatsapp-chat.svg" alt="Icone Commande">
+            <div class="feature-v2-item">
+                <div class="feature-v2-icon-wrapper">
+                    <img src="<?php echo IMAGES_PATH; ?>whatsapp-chat.svg" alt="Icône Commande">
                 </div>
                 <h3>Commande WhatsApp</h3>
                 <p>Commandez facilement via WhatsApp pour un service personnalisé et rapide.</p>
@@ -107,7 +87,17 @@ $img3 = !empty($featured_products[2]['image']) ? UPLOADS_URL . e($featured_produ
     </div>
 </section>
 
+<!-- ===== SECTION CTA (APPEL À L'ACTION) ===== -->
+<section class="cta-section">
+    <div class="container cta-container">
+        <h2>Prêt à Découvrir Votre Parfum Idéal ?</h2>
+        <p>Explorez notre collection et trouvez le parfum qui vous ressemble. Commandez facilement via WhatsApp.</p>
+        <a href="boutique.php" class="btn btn-hero-primary">
+            Explorer la Collection
+        </a>
+    </div>
+</section>
+
 <?php
-// On inclut le pied de page
 require_once __DIR__ . '/includes/footer.php';
 ?>
