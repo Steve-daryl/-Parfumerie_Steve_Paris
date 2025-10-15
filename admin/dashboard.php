@@ -1,9 +1,14 @@
 <?php 
 require_once("../config/database.php");
 session_start();
-if(!isset($_SESSION['id'])){
+if(!isset($_SESSION['administrateurs_id'])){
     header('Location: login.php');
 }
+
+$sql="SELECT COUNT(*) AS nombre_de_produits FROM produits;";
+$stmt_stock = $pdo->prepare($sql);
+$stmt_stock->execute();
+$produits = $stmt_stock->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -12,6 +17,7 @@ if(!isset($_SESSION['id'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Parfumerie Luxe</title>
     <link rel="stylesheet" href="../assets/css/admin.css">
+    <!-- <link rel="stylesheet" href="../assets/css/dashbordproduits.css"> -->
     <!-- Pour les icônes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Pour les graphiques (ex: Chart.js) -->
@@ -21,13 +27,13 @@ if(!isset($_SESSION['id'])){
     <div class="dashboard-container">
         <!-- Barre latérale -->
         <aside class="sidebar">
-            <div class="logo"><img src="../assets/images/logo.png" width="80" height="70" alt="logo"></div>
+            <div class="logo"><img src="../assets/images/logo_sans_arriere.png" width="70" height="auto" alt="logo"></div>
             <nav class="nav-links">
                 <ul>
-                    <li><a href="#" class="active" title="Tableau de bord"><i class="fas fa-th-large"></i></a></li>
+                    <li><a href="../admin/dashboard.php" class="active" title="Tableau de bord"><i class="fas fa-th-large"></i></a></li>
                     <li><a href="../admin/produits.php" title="Gestion des produits"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-package w-5 h-5" aria-hidden="true"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"></path><path d="M12 22V12"></path><polyline points="3.29 7 12 12 20.71 7"></polyline><path d="m7.5 4.27 9 5.15"></path></svg><!-- <i class="fas fa-chart-line"></i> --></a></li>
-                    <li><a href="#"><i class="fas fa-cog"></i></a></li>
-                    <li><a href="#"><i class="fas fa-bell"></i></a></li>
+                    <li><a href="../admin/alert.php"><i class="fas fa-bell"></i></a></li>
+                    <!-- <li><a href="#"><i class="fas fa-cog"></i></a></li> -->
                     <li><a href="../admin/logout.php"><i class="fas fa-sign-out-alt"></i></a></li>
                 </ul>
             </nav>
@@ -55,35 +61,37 @@ if(!isset($_SESSION['id'])){
                 <div class="card main-card">
                     <i class="fas fa-wallet icon-bg-blue"></i>
                     <h3>Ventes mensuelles</h3>
-                    <p class="amount">$2190.19</p>
+                    <p class="amount">219019 Fcfa</p>
                 </div>
                 <div class="card main-card">
                     <i class="fas fa-users icon-bg-blue"></i>
                     <h3>Nouveaux clients</h3>
-                    <p class="amount">$2.23</p>
+                    <p class="amount">22300 Fcfa</p>
                 </div>
                 <div class="card main-card">
                     <i class="fas fa-boxes icon-bg-blue"></i>
                     <h3>Stock total</h3>
-                    <p class="amount">$1875.10</p>
+                    <?php foreach ($produits as $produit):?>
+                        <p class="amount"><?= $produit['nombre_de_produits'];?> Unités</p>
+                        <?php endforeach?>
                 </div>
                 <div class="card main-card">
                     <i class="fas fa-shipping-fast icon-bg-blue"></i>
                     <h3>Commandes en cours</h3>
-                    <p class="amount">$19.112</p>
+                    <p class="amount">191200 Fcfa</p>
                 </div>
 
                 <!-- Section Graphique Performance -->
-                <div class="card chart-section">
+                <!-- <div class="card chart-section">
                     <h3>Évolution des performances</h3>
                     <canvas id="performanceChart"></canvas>
-                </div>
+                </div> -->
 
                 <!-- Section Dépenses -->
-                <div class="card expenses-section">
+                <!-- <div class="card expenses-section">
                     <h3>Toutes les dépenses</h3>
                     <canvas id="expensesChart"></canvas>
-                </div>
+                </div> -->
 
                 <!-- Section Produits Favoris -->
                 <div class="card favorite-products">
@@ -116,13 +124,13 @@ if(!isset($_SESSION['id'])){
                         </div>
                         <div class="alert-item near-expiry">
                             <p>Testeur "Fleur de Lys" - Expire dans 30 jours.</p>
-                            <button class="btn-tertiary">Promouvoir</button>
+                            <button href='../admin/delete_product.php' class="btn-tertiary">Promouvoir</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Section Dernières Commandes -->
-                <div class="card orders-section">
+                <!-- <div class="card orders-section">
                     <h3>Dernières commandes</h3>
                     <table>
                         <thead>
@@ -148,23 +156,23 @@ if(!isset($_SESSION['id'])){
                                 <td>11/03/23</td>
                                 <td>$200.00</td>
                                 <td><span class="status pending">En attente</span></td>
-                            </tr>
+                            </tr>-->
                             <!-- Plus de commandes -->
-                        </tbody>
+                    <!--</tbody>
                     </table>
-                </div>
+                </div> -->
 
                 <!-- Section Offre Spéciale -->
-                <div class="card special-offer">
+                <!-- <div class="card special-offer">
                     <h3>Offre Spéciale du mois</h3>
                     <img src="path/to/offer-perfume.jpg" alt="Offre Parfum">
                     <p>Offre à -20% sur les Parfums Floraux</p>
                     <button class="btn-primary">Voir l'offre</button>
-                </div>
+                </div> -->
             </div>
         </main>
     </div>
 
-    <script src="js/main.js"></script>
+    <script src="../assets/js/admin.js"></script>
 </body>
 </html>

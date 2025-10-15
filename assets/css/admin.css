@@ -21,6 +21,7 @@
     --gradient-luxe: linear-gradient(135deg, #1A1A2A 0%, #0F0F1A 100%); /* Dégradé subtil pour profondeur */
 }
 
+
 body {
     font-family: 'Poppins', sans-serif; /* Corps léger et moderne */
     margin: 0;
@@ -33,6 +34,7 @@ body {
 .dashboard-container {
     display: flex;
     min-height: 100vh;
+
 }
 
 /* Sidebar - Plus raffinée avec or */

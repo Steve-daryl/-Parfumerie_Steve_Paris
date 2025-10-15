@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="login-container">
         <div class="login-card">
             <div class="logo">
-                <img src="../assets/images/logo.png" alt="Steve Paris Logo">
+                <img src="../assets/images/logo_or.png"  width="35" height="auto" alt="Steve Paris Logo">
                 <span>Steve Paris</span>
             </div>
             <h2>Se Connecter</h2>
@@ -82,11 +82,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <button type="submit" class="login-button">Se Connecter</button>
             </form>
-            <div class="links">
+            <!-- <div class="links">
                 <a href="#">Mot de passe oublié ?</a>
                 <span>&bull;</span>
                 <a href="#">Créer un compte</a>
-            </div>
+            </div> -->
         </div>
     </div>
 </body>
