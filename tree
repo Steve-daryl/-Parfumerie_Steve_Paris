@@ -15,9 +15,11 @@ Parfumerie_Steve_Paris/
 │   ├── produits.php         # Gestion produits
 │   ├── commandes.php        # Gestion commandes
 │   ├── categories.php       # Gestion catégories
-│   └── logout.php           # Déconnexion
+│   ├── logout.php           # DÉCONNEXION
+|   └── Dashboard.php        # Tableau de bord
 ├── assets/
 │   ├── css/
+│   │   ├── login_admin.css  # Style de la page de connexion
 │   │   ├── style.css        # Styles frontend
 │   │   └── admin.css        # Styles dashboard
 │   ├── js/

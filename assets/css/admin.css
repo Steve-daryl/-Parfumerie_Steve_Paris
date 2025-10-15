@@ -1,0 +1,565 @@
+/* css/style.css - Thème Luxe Amélioré */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500&display=swap');
+
+:root {
+    --bg-dark: #0F0F1A; /* Noir profond avec une touche navy pour l'élégance */
+    --card-dark: #1A1A2A; /* Velouté sombre, comme un cuir luxueux */
+    --text-light: #F5F5F5; /* Blanc cassé pour une douceur sophistiquée */
+    --text-muted: #B0B0B0; /* Gris argenté subtil */
+    --accent-gold: #D4AF37; /* Or chaleureux pour les accents luxueux */
+    --accent-gold-dark: #B8962E; /* Or plus foncé pour les hovers */
+    --success-emerald: #2D5A3A; /* Vert émeraude pour le succès */
+    --warning-amber: #DAA520; /* Ambre doré pour les alertes */
+    --danger-burgundy: #800020; /* Bordeaux profond pour les dangers */
+    --status-delivered: #2D5A3A;
+    --status-pending: #DAA520;
+    --status-shipped: #4682B4; /* Bleu royal pour l'expédition */
+    --status-cancelled: #800020;
+    --border-gold: rgba(212, 175, 55, 0.3); /* Bordure or subtile */
+    --shadow-luxe: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(212, 175, 55, 0.1); /* Ombre profonde avec halo or */
+    --gradient-luxe: linear-gradient(135deg, #1A1A2A 0%, #0F0F1A 100%); /* Dégradé subtil pour profondeur */
+}
+
+
+body {
+    font-family: 'Poppins', sans-serif; /* Corps léger et moderne */
+    margin: 0;
+    padding: 0;
+    background: var(--gradient-luxe);
+    color: var(--text-light);
+    line-height: 1.7; /* Espacement plus généreux pour l'élégance */
+}
+
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+
+}
+
+/* Sidebar - Plus raffinée avec or */
+.sidebar {
+    width: 90px; /* Légèrement plus large pour une présence sophistiquée */
+    background: var(--gradient-luxe);
+    padding: 30px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid var(--border-gold);
+    box-shadow: var(--shadow-luxe);
+}
+
+.sidebar .logo {
+    font-family: 'Playfair Display', serif; /* Police serif luxueuse pour le logo */
+    font-size: 2.5em;
+    font-weight: 700;
+    color: var(--accent-gold);
+    margin-bottom: 50px;
+    text-shadow: 0 2px 4px rgba(212, 175, 55, 0.3);
+}
+
+.sidebar .nav-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar .nav-links li {
+    margin-bottom: 35px; /* Plus d'espace pour fluidité */
+}
+
+.sidebar .nav-links a {
+    color: var(--text-muted);
+    font-size: 1.6em;
+    display: block;
+    padding: 12px;
+    border-radius: 12px; /* Coins plus arrondis */
+    transition: all 0.4s ease; /* Transition plus fluide */
+    position: relative;
+    overflow: hidden;
+}
+
+.sidebar .nav-links a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.sidebar .nav-links a:hover::before {
+    left: 100%;
+}
+
+.sidebar .nav-links a:hover,
+.sidebar .nav-links a.active {
+    background-color: rgba(212, 175, 55, 0.1); /* Fond or translucide */
+    color: var(--accent-gold);
+    transform: translateX(5px); /* Léger décalage pour dynamisme */
+    box-shadow: var(--shadow-luxe);
+}
+
+/* Main Content - Padding plus généreux */
+.main-content {
+    flex-grow: 1;
+    padding: 40px;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--border-gold);
+    padding-bottom: 20px;
+}
+
+.dashboard-header h2 {
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2em; /* Plus grand pour impact */
+    color: var(--text-light);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.search-bar {
+    position: relative;
+    width: 350px; /* Plus large pour élégance */
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 15px 20px 15px 50px; /* Padding plus généreux */
+    border: 1px solid var(--border-gold);
+    border-radius: 25px; /* Plus arrondi, comme une gemme */
+    background-color: var(--card-dark);
+    color: var(--text-light);
+    font-size: 1em;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.search-bar input:focus {
+    outline: none;
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+    transform: scale(1.02);
+}
+
+.search-bar input::placeholder {
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.search-bar i {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent-gold);
+    font-size: 1.1em;
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+}
+
+.header-icons i {
+    font-size: 1.5em;
+    color: var(--text-muted);
+    margin-left: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 5px;
+    border-radius: 50%;
+}
+
+.header-icons i:hover {
+    color: var(--accent-gold);
+    background: rgba(212, 175, 55, 0.1);
+    transform: scale(1.1);
+}
+
+.user-profile img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-left: 25px;
+    object-fit: cover;
+    border: 2px solid var(--accent-gold);
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.user-profile img:hover {
+    transform: scale(1.1);
+}
+
+/* Grid Layout for cards - Gap plus large */
+.grid-layout {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+
+/* Base Card Style - Plus luxueux avec ombres et bordures */
+.card {
+    background: var(--gradient-luxe);
+    padding: 30px;
+    border-radius: 16px; /* Coins plus doux */
+    box-shadow: var(--shadow-luxe);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-gold);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(212, 175, 55, 0.2);
+}
+
+.card h3 {
+    margin-top: 0;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4em; /* Plus élégant */
+    color: var(--text-light);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.card h3 .fas {
+    margin-right: 12px;
+    color: var(--accent-gold); /* Or pour les icônes d'alertes */
+}
+
+/* Main Cards - Icônes plus grandes */
+.main-card {
+    align-items: flex-start;
+}
+
+.main-card i {
+    font-size: 2.8em; /* Plus imposant */
+    color: var(--accent-gold);
+    margin-bottom: 20px;
+    text-shadow: 0 2px 4px rgba(212, 175, 55, 0.3);
+}
+
+.main-card .amount {
+    font-size: 2.5em;
+    font-weight: 500;
+    color: var(--text-light);
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 1px; /* Espacement pour sophistication */
+}
+
+/* Chart Sections - Hauteur ajustée */
+.chart-section,
+.expenses-section {
+    grid-column: span 2;
+    height: 400px; /* Plus haute pour immersion */
+    position: relative;
+}
+
+/* Favorite Products - Images plus raffinées */
+.favorite-products {
+    grid-column: span 2;
+    display: flex;
+    flex-direction: column;
+}
+
+.favorite-products .product-list {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-grow: 1;
+    align-items: center;
+}
+
+.favorite-products .product-item img {
+    width: 100px;
+    height: 100px; /* Plus grandes pour détail */
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid var(--border-gold);
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-luxe);
+}
+
+.favorite-products .product-item img:hover {
+    transform: scale(1.1) rotate(2deg); /* Rotation subtile pour fun luxueux */
+    border-color: var(--accent-gold);
+}
+
+/* Stock Alerts - Plus dramatiques */
+.stock-alerts {
+    grid-column: span 2;
+}
+
+.stock-alerts .alert-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.stock-alerts .alert-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(218, 165, 32, 0.05); /* Ambre très subtil */
+    border-radius: 12px;
+    padding: 15px 20px;
+    border-left: 4px solid var(--warning-amber);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.stock-alerts .alert-item.out-of-stock {
+    background: rgba(128, 0, 32, 0.05);
+    border-left: 4px solid var(--danger-burgundy);
+}
+
+.stock-alerts .alert-item.near-expiry {
+    background: rgba(70, 130, 180, 0.05);
+    border-left: 4px solid var(--status-shipped);
+}
+
+.stock-alerts .alert-item p {
+    margin: 0;
+    font-size: 1em;
+    font-style: italic;
+}
+
+/* Buttons for alerts - Plus opulents */
+.btn-primary, .btn-secondary, .btn-tertiary {
+    padding: 10px 20px;
+    border: 1px solid transparent;
+    border-radius: 25px; /* Pilules arrondies */
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-dark));
+    color: #1A1A2A;
+    border-color: var(--accent-gold);
+}
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--accent-gold-dark), var(--accent-gold));
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, var(--danger-burgundy), #660018);
+    color: white;
+    border-color: var(--danger-burgundy);
+}
+.btn-secondary:hover {
+    background: linear-gradient(135deg, #660018, var(--danger-burgundy));
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(128, 0, 32, 0.4);
+}
+
+.btn-tertiary {
+    background: linear-gradient(135deg, var(--status-shipped), #36648B);
+    color: white;
+    border-color: var(--status-shipped);
+}
+.btn-tertiary:hover {
+    background: linear-gradient(135deg, #36648B, var(--status-shipped));
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(70, 130, 180, 0.4);
+}
+
+/* Orders Section - Table plus élégante */
+.orders-section {
+    grid-column: span 2;
+    overflow-x: auto;
+}
+
+.orders-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: var(--card-dark);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.orders-section th,
+.orders-section td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-gold);
+}
+
+.orders-section th {
+    color: var(--accent-gold);
+    font-size: 0.95em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+.orders-section td {
+    color: var(--text-light);
+    font-size: 1em;
+    white-space: nowrap;
+}
+
+.orders-section td .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    vertical-align: middle;
+    margin-right: 10px;
+    border: 1px solid var(--border-gold);
+}
+
+.status {
+    padding: 8px 15px;
+    border-radius: 20px; /* Plus arrondi */
+    font-size: 0.85em;
+    font-weight: 500;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status.delivered { background: linear-gradient(135deg, var(--success-emerald), #1F4330); }
+.status.pending { background: linear-gradient(135deg, var(--warning-amber), #B8860B); }
+.status.shipped { background: linear-gradient(135deg, var(--status-shipped), #36648B); }
+.status.cancelled { background: linear-gradient(135deg, var(--danger-burgundy), #660018); }
+
+/* Special Offer - Centrée et opulente */
+.special-offer {
+    grid-column: span 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    background: var(--gradient-luxe);
+    border: 1px solid var(--border-gold);
+}
+
+.special-offer img {
+    max-width: 200px;
+    height: auto;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-luxe);
+    border: 2px solid var(--accent-gold);
+}
+
+.special-offer p {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: var(--accent-gold);
+    margin-bottom: 25px;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 1px;
+}
+
+/* Responsive adjustments - Adaptées pour luxe mobile */
+@media (max-width: 1200px) {
+    .grid-layout {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+    }
+    .chart-section,
+    .expenses-section,
+    .favorite-products,
+    .stock-alerts,
+    .orders-section,
+    .special-offer {
+        grid-column: span 3;
+    }
+}
+
+@media (max-width: 900px) {
+    .grid-layout {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    .chart-section,
+    .expenses-section,
+    .favorite-products,
+    .stock-alerts,
+    .orders-section,
+    .special-offer {
+        grid-column: span 2;
+    }
+    .dashboard-header {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    .search-bar {
+        order: 3;
+        width: 100%;
+        margin-top: 15px;
+    }
+    .main-content {
+        padding: 25px;
+    }
+}
+
+@media (max-width: 600px) {
+    .sidebar {
+        width: 70px;
+        padding: 15px 0;
+    }
+    .sidebar .nav-links li {
+        margin-bottom: 25px;
+    }
+    .main-content {
+        padding: 20px;
+    }
+    .grid-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .chart-section,
+    .expenses-section,
+    .favorite-products,
+    .stock-alerts,
+    .orders-section,
+    .special-offer {
+        grid-column: span 1;
+    }
+    .dashboard-header h2 {
+        font-size: 1.8em;
+    }
+    .header-icons i {
+        margin-left: 15px;
+        font-size: 1.3em;
+    }
+    .search-bar input {
+        padding: 12px 15px 12px 45px;
+    }
+}
