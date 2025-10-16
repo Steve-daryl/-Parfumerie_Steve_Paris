@@ -78,7 +78,7 @@ try {
                     <!-- Le conteneur de l'image -->
                     <div class="product-image-link" data-product-id="<?php echo e($product['id']); ?>">
                         <a href="produit.php?id=<?php echo e($product['id']); ?>">
-                            <img src="<?php echo UPLOADS_URL . e($product['image'] ?? 'default.jpg'); ?>" alt="<?php echo e($product['nom']); ?>">
+                            <img src="./assets/images/<?php echo  e($product['image'] ?? 'default.jpg'); ?>" alt="<?php echo e($product['nom']); ?>">
                         </a>
 
                         <div class="product-image-overlay">

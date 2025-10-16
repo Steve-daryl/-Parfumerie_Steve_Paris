@@ -132,7 +132,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <header class="dashboard-header">
                 <h2>Ajouter un Nouveau Produit</h2>
                 <div class="header-icons">
-                    <i class="fas fa-bell"></i>
+                    <a href="../index.php"><i class="fas fa-users icon-bg-blue" title="Interface client"></i></a>
+                    <!-- <i class="fas fa-bell"></i> -->
                     <i class="fas fa-question-circle"></i>
                     <div class="user-profile">
                         <img src="../assets/images/sasuke uchiwa.jpg" title="profil" alt="User">
@@ -164,7 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
                             <div class="form-group">
                                 <label for="contenance">Contenance:</label>
-                                <input type="text" id="contenance" name="contenance" required value="<?php echo htmlspecialchars($_POST['contenance'] ?? ''); ?>">
+                                <input type="number" id="contenance" name="contenance" required value="<?php echo htmlspecialchars($_POST['contenance'] ?? ''); ?>">
                             </div>
                             <div class="form-group">
                                 <label for="date_de_peremption">Date de Péremption:</label>

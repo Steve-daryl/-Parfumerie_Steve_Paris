@@ -48,7 +48,8 @@ $produits = $stmt_stock->fetchAll();
                     <i class="fas fa-search"></i>
                 </div>
                 <div class="header-icons">
-                    <i class="fas fa-bell"></i>
+                    <a href="../index.php"><i class="fas fa-users icon-bg-blue" title="Interface client"></i></a>
+                    <!-- <i class="fas fa-bell"></i> -->
                     <i class="fas fa-question-circle"></i>
                     <div class="user-profile">
                         <img src="../assets/images/sasuke uchiwa.jpg" title="profil" alt="User">

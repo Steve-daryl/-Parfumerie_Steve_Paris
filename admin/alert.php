@@ -95,7 +95,8 @@ try {
             <header class="dashboard-header">
                 <h2>Alertes de Stock & Péremption</h2>
                 <div class="header-icons">
-                    <i class="fas fa-bell"></i>
+                    <a href="../index.php"><i class="fas fa-users icon-bg-blue" title="Interface client"></i></a>
+                    <!-- <i class="fas fa-bell"></i> -->
                     <i class="fas fa-question-circle"></i>
                     <div class="user-profile">
                         <img src="../assets/images/sasuke uchiwa.jpg" title="profil" alt="User">

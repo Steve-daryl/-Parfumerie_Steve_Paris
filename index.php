@@ -1,4 +1,5 @@
 <?php
+require_once('./config/database.php');
 require_once __DIR__ . '/includes/header.php';
 
 try {
@@ -8,19 +9,16 @@ try {
         "?text=Bonjour, j'aimerais en savoir plus sur vos parfums de luxe.";
 
     // 3 produits pour la section héros
-    $stmt_products = $pdo->prepare("SELECT id, nom, image FROM produits WHERE actif = 1 ORDER BY id DESC LIMIT 3");
-    $stmt_products->execute();
-    $featured_products = $stmt_products->fetchAll(PDO::FETCH_ASSOC);
-} catch (\PDOException $e) {
+    $img1 = "assets\images\uploads\home_1.jpeg";
+    $img2 = "assets\images\uploads\home_2.jpeg";
+    $img3 = "assets\images\uploads\home_3.jpg";
+    } catch (\PDOException $e) {
     error_log("Erreur sur la page d'accueil : " . $e->getMessage());
     $featured_products = [];
     $whatsapp_link = '#';
 }
 
 // Assignation des images pour la grille de la section héros avec des images de secours
-$img1 = !empty($featured_products[0]['image']) ? UPLOADS_URL . e($featured_products[0]['image']) : 'https://images.unsplash.com/photo-1680503504111-1bbc7fc2103e?q=85';
-$img2 = !empty($featured_products[1]['image']) ? UPLOADS_URL . e($featured_products[1]['image']) : 'https://images.unsplash.com/photo-1615160460367-dcccd27e11ad?q=85';
-$img3 = !empty($featured_products[2]['image']) ? UPLOADS_URL . e($featured_products[2]['image']) : 'https://images.unsplash.com/photo-1724732678052-1437962cbbab?q=85';
 ?>
 
 <!-- ===== SECTION HÉROS MODERNISÉE ===== -->
@@ -28,17 +26,17 @@ $img3 = !empty($featured_products[2]['image']) ? UPLOADS_URL . e($featured_produ
     <div class="container hero-v2-container">
         <div class="hero-v2-content">
             <h1 class="hero-v2-title">
-                Parfums de <span class="hero-v2-highlight">Luxe</span>
+              Parfums de <span class="hero-v2-highlight">Luxe</span>
             </h1>
             <p class="hero-v2-subtitle">
-                Découvrez notre collection exclusive de parfums haute couture. Des parfums d'exception pour des moments inoubliables.
+              Découvrez notre collection exclusive de parfums haute couture. Des parfums d'exception pour des moments inoubliables.
             </p>
             <div class="hero-v2-actions">
                 <a href="boutique.php" class="btn btn-hero-primary">
-                    Découvrir la Boutique
+                  Découvrir la Boutique
                 </a>
                 <a href="<?php echo $whatsapp_link; ?>" target="_blank" class="btn btn-hero-secondary">
-                    Contactez-nous
+                  Contactez-nous
                 </a>
             </div>
         </div>

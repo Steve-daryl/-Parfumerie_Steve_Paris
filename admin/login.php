@@ -52,14 +52,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Se Connecter | Steve Paris</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/login_admin.css"> <!-- Assurez-vous que ce fichier CSS existe -->
+    <link rel="stylesheet" href="../assets/css/login_admin1.css"> <!-- Assurez-vous que ce fichier CSS existe -->
 </head>
 <body>
     <div class="background-pattern"></div>
     <div class="login-container">
         <div class="login-card">
             <div class="logo">
-                <img src="../assets/images/logo_or.png"  width="35" height="auto" alt="Steve Paris Logo">
+                <img src="../assets/images/logo_en_noir_or.PNG"  width="60" height="auto" alt="Steve Paris Logo">
                 <span>Steve Paris</span>
             </div>
             <h2>Se Connecter</h2>

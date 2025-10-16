@@ -69,11 +69,12 @@ $i=1;
                 <div class="search-bar">
                     <form action="produits.php" method="GET">
                         <input type="text" name="search" placeholder="Rechercher un produit..." value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
-                        <button type="submit"><i class="fas fa-search"></i></button>
+                        <!-- <button type="submit"><i class="fas fa-search"></i></button> -->
                     </form>
                 </div>
                 <div class="header-icons">
-                    <i class="fas fa-bell"></i>
+                    <a href="../index.php"><i class="fas fa-users icon-bg-blue" title="Interface client"></i></a>
+                    <!-- <i class="fas fa-bell"></i> -->
                     <i class="fas fa-question-circle"></i>
                     <div class="user-profile">
                     <img src="../assets/images/sasuke uchiwa.jpg" title="profil" alt="User">

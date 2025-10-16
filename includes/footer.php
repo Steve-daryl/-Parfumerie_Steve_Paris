@@ -15,7 +15,7 @@
             <ul>
                 <li><a href="#">Mentions Légales</a></li>
                 <li><a href="#">Politique de confidentialité</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#">Contact: <?php echo $whatsapp_numero; ?> </a></li>
             </ul>
         </nav>
     </div>

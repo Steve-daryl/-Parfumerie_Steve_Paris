@@ -203,8 +203,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $product) {
                                 <input type="text" id="marque" name="marque" required value="<?php echo htmlspecialchars($_POST['marque'] ?? ($product['marque'] ?? '')); ?>">
                             </div>
                             <div class="form-group">
-                                <label for="contenance">Contenance:</label>
-                                <input type="text" id="contenance" name="contenance" required value="<?php echo htmlspecialchars($_POST['contenance'] ?? ($product['contenance'] ?? '')); ?>">
+                                <label for="contenance">Contenance (ml):</label>
+                                <input type="number" id="contenance" name="contenance" required value="<?php echo htmlspecialchars($_POST['contenance'] ?? ($product['contenance'] ?? '')); ?>">
                             </div>
                             <div class="form-group">
                                 <label for="date_de_peremption">Date de Péremption:</label>

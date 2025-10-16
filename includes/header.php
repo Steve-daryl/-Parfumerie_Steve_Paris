@@ -21,6 +21,7 @@ try {
 
 // Définition du nom du site et de la page actuelle
 $site_name = e($params['site_nom'] ?? 'Parfumerie Steve Paris');
+$whatsapp_numero = e($params['whatsapp_numero'] ?? '+237 6 90 98 47 58');
 $current_page = basename($_SERVER['PHP_SELF']);
 ?>
 <!DOCTYPE html>
@@ -41,7 +42,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         <div class="container">
             <!-- NOUVELLE STRUCTURE DU LOGO CORRIGÉE -->
             <a href="<?php echo BASE_URL; ?>" class="logo-link-v2">
-                <img src="<?php echo IMAGES_PATH; ?>logo.png" alt="Logo de <?php echo $site_name; ?>" class="logo-v2">
+                <img src="<?php echo IMAGES_PATH; ?>logo_sans_arriere.png" width="40" height="auto" alt="Logo de <?php echo $site_name; ?>" class="logo-v2">
                 <span class="logo-text-v2"><?php echo $site_name; ?></span>
             </a>
 
