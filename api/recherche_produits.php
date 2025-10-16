@@ -58,7 +58,7 @@ try {
             <div class="product-card">
                 <a href="produit.php?id=' . e($product['id']) . '" class="product-image-link">'
                 . $stockBadge .
-                '<img src="' . UPLOADS_URL . e($product['image'] ?? 'default.jpg') . '" alt="' . e($product['nom']) . '">
+                '<img src="./assets/images/' . e($product['image'] ?? 'default.jpg') . '" alt="' . e($product['nom']) . '">
                 </a>
                 <div class="product-details">
                     <div class="product-info">

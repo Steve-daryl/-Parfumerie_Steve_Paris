@@ -101,7 +101,7 @@ $whatsapp_number = get_setting($pdo, 'whatsapp_numero');
                 </div>
                 <?php foreach ($cart_items as $item) : ?>
                     <div class="cart-item" data-id="<?php echo $item['id']; ?>">
-                        <img src="<?php echo UPLOADS_URL . e($item['image']); ?>" alt="<?php echo e($item['nom']); ?>" class="cart-item-image">
+                        <img src="./assets/images/<?php echo  e($item['image']); ?>" alt="<?php echo e($item['nom']); ?>" class="cart-item-image">
                         <div class="cart-item-details">
                             <p class="cart-item-name"><?php echo e($item['nom']); ?></p>
                             <p class="cart-item-size"><?php echo e($item['contenance']); ?>ml</p>

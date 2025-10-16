@@ -850,9 +850,9 @@ img {
 }
 
 .btn-hero-secondary {
-    background: transparent;
+    background: #25D366;
     border: 2px solid #ddd;
-    color: var(--color-text);
+    color: white;
     padding: 12px 28px;
     border-radius: 8px;
     font-weight: 600;

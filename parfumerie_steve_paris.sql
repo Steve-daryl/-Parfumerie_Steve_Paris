@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 13 oct. 2025 à 22:28
+-- Généré le : jeu. 16 oct. 2025 à 15:48
 -- Version du serveur : 10.4.22-MariaDB
 -- Version de PHP : 8.1.2
 
@@ -45,7 +45,7 @@ CREATE TABLE `administrateurs` (
 --
 
 INSERT INTO `administrateurs` (`id`, `username`, `email`, `password`, `nom_complet`, `role`, `actif`, `derniere_connexion`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@parfumsdejojo.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Administrateur Principal', 'super_admin', 1, NULL, '2025-10-13 15:25:54', '2025-10-13 15:25:54');
+(1, 'admin', 'admin@parfumsdejojo.com', '$2y$10$bPzzgZNdriJHjOb6z3fzjewiKrtmFhK91mjadobpZnVDb5G6b6t/i', 'Administrateur Principal', 'super_admin', 1, NULL, '2025-10-13 15:25:54', '2025-10-14 07:53:29');
 
 -- --------------------------------------------------------
 
@@ -91,9 +91,9 @@ CREATE TABLE `parametres` (
 --
 
 INSERT INTO `parametres` (`id`, `cle`, `valeur`, `description`, `type`, `updated_at`) VALUES
-(1, 'site_nom', 'Parfums de Jojo', 'Nom du site', 'text', '2025-10-13 15:25:54'),
+(1, 'site_nom', 'Steve Paris', 'Nom du site', 'text', '2025-10-15 22:28:52'),
 (2, 'site_email', 'contact@parfumsdejojo.com', 'Email de contact', 'text', '2025-10-13 15:25:54'),
-(3, 'whatsapp_numero', '+237123456789', 'Numéro WhatsApp', 'text', '2025-10-13 15:25:54'),
+(3, 'whatsapp_numero', '+237 690 98 47 58', 'Numéro WhatsApp', 'text', '2025-10-15 22:36:51'),
 (4, 'devise', 'FCFA', 'Devise utilisée', 'text', '2025-10-13 15:25:54'),
 (5, 'maintenance_mode', '0', 'Mode maintenance', 'boolean', '2025-10-13 15:25:54');
 
@@ -128,22 +128,11 @@ CREATE TABLE `produits` (
 --
 
 INSERT INTO `produits` (`id`, `reference`, `nom`, `description`, `contenance`, `prix_achat`, `prix_vente`, `categorie_id`, `numero_de_lot`, `date_de_peremption`, `marque`, `stock`, `image`, `statut`, `actif`, `created_at`, `updated_at`) VALUES
-(1, '', 'Parfum Luxe Gold', 'Un parfum d\'exception aux notes boisées et épicées', NULL, '45000.00', '60000.00', 1, NULL, NULL, 'Luxury Collection', 50, NULL, 'disponible', 1, '2025-10-13 15:25:54', '2025-10-13 15:25:54'),
-(2, '', 'Essence Florale', 'Fragrance délicate aux notes florales', NULL, '38000.00', '50000.00', 2, NULL, NULL, 'Premium Line', 30, NULL, 'disponible', 1, '2025-10-13 15:25:54', '2025-10-13 15:25:54'),
-(3, '', 'Mystery Night', 'Parfum mystérieux pour soirées inoubliables', NULL, '52000.00', '70000.00', 3, NULL, NULL, 'Exclusive', 20, NULL, 'disponible', 1, '2025-10-13 15:25:54', '2025-10-13 15:25:54');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `users`
---
-
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+(1, 'Vero qui accusantium', 'Steve Paris', 'Un parfum d\'exception aux notes boisées et épicées', '100', '45000.00', '60000.00', 1, 'Reprehenderit ut cup', '2025-10-14', 'eau de parfum', 2, '68f0c98d2c1cf_home_3.jpg', 'disponible', 1, '2025-10-13 15:25:54', '2025-10-16 10:33:16'),
+(2, 'Natus consequatur o', 'Baccarat rouge', 'Fragrance délicate aux notes florales', '100', '38000.00', '50000.00', 2, 'Qui qui fugiat quae', '2025-03-13', 'Premium Line', 30, '68ef839d28b8c_Baccarat_rouge.PNG', 'disponible', 1, '2025-10-13 15:25:54', '2025-10-15 20:10:31'),
+(3, 'Officiis fugiat del', 'KAY ALI', 'Parfum mystérieux pour soirées inoubliables', '100', '52000.00', '70000.00', 3, 'Ducimus ut irure di', '2018-04-16', 'Exclusive', 4, 'Kaly.jpg', 'disponible', 1, '2025-10-13 15:25:54', '2025-10-15 20:10:59'),
+(12, 'Animi enim hic sit', 'Tom Ford', 'Minim harum perferen', '50', '94.00', '27500.00', 3, 'Commodo velit dolor', '2025-10-30', 'Atque doloribus quo', 66, '68f012e0e8123_tom ford.jpg', 'disponible', 1, '2025-10-15 21:32:16', '2025-10-16 09:58:20'),
+(13, 'Incididunt ipsam lib', 'Tempore in deleniti', 'Do quis quaerat volu', '86', '95.00', '21.00', 2, 'Dolores rerum deseru', '1996-03-08', 'Nostrum assumenda et', 16, '68f0a32b7058c_image acceuil 1.jpeg', 'disponible', 1, '2025-10-16 07:47:55', '2025-10-16 07:47:55');
 
 --
 -- Index pour les tables déchargées
@@ -179,13 +168,6 @@ ALTER TABLE `produits`
   ADD KEY `idx_actif` (`actif`);
 
 --
--- Index pour la table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`);
-
---
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
@@ -211,13 +193,7 @@ ALTER TABLE `parametres`
 -- AUTO_INCREMENT pour la table `produits`
 --
 ALTER TABLE `produits`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT pour la table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Contraintes pour les tables déchargées

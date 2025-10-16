@@ -51,7 +51,7 @@ if (!empty($product['date_de_peremption'])) {
     <div class="product-detail-grid">
         <!-- Colonne de l'image -->
         <div class="product-image-wrapper">
-            <img src="<?php echo UPLOADS_URL . e($product['image'] ?? 'default.jpg'); ?>" alt="<?php echo e($product['nom']); ?>">
+            <img src="./assets/images/<?php echo  e($product['image'] ?? 'default.jpg'); ?>" alt="<?php echo e($product['nom']); ?>">
         </div>
 
         <!-- Colonne des détails -->

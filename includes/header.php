@@ -44,7 +44,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <header class="main-header">
         <div class="container">
             <a href="<?php echo BASE_URL; ?>" class="logo-link-v2">
-                <img src="<?php echo IMAGES_PATH; ?>logo.png" alt="Logo de <?php echo $site_name; ?>" class="logo-v2">
+                <img src="<?php echo IMAGES_PATH; ?>logo_sans_arriere.png" alt="Logo de <?php echo $site_name; ?>" class="logo-v2">
                 <span class="logo-text-v2"><?php echo $site_name; ?></span>
             </a>
             <nav class="main-nav">

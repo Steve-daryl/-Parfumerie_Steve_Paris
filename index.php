@@ -18,9 +18,9 @@ try {
 }
 
 // Assignation des images pour la grille de la section héros avec des images de secours
-$img1 = !empty($featured_products[0]['image']) ? UPLOADS_URL . e($featured_products[0]['image']) : 'https://images.unsplash.com/photo-1680503504111-1bbc7fc2103e?q=85';
-$img2 = !empty($featured_products[1]['image']) ? UPLOADS_URL . e($featured_products[1]['image']) : 'https://images.unsplash.com/photo-1615160460367-dcccd27e11ad?q=85';
-$img3 = !empty($featured_products[2]['image']) ? UPLOADS_URL . e($featured_products[2]['image']) : 'https://images.unsplash.com/photo-1724732678052-1437962cbbab?q=85';
+$img1 = './assets/images/uploads/home_1.jpeg';
+$img2 = './assets/images/uploads/home_2.jpeg';
+$img3 = './assets/images/uploads/home_3.jpeg';
 ?>
 
 <!-- ===== SECTION HÉROS MODERNISÉE ===== -->
