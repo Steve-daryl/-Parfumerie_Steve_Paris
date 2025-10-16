@@ -1,10 +1,12 @@
 /**
  * =================================================================
- * Script principal pour l'interactivité du site
- * - Gestion du menu mobile
- * - Gestion des filtres de la boutique
- * - Gestion de la recherche en direct
- * - Logique du panier (Ajout depuis boutique et détail, gestion du panier)
+ * SCRIPT PRINCIPAL POUR L'INTERACTIVITÉ DU SITE (VERSION FINALE CONSOLIDÉE)
+ * =================================================================
+ * Ce fichier gère :
+ * 1. Le menu de navigation mobile.
+ * 2. L'ouverture et la fermeture du panneau de filtres.
+ * 3. La recherche de produits en direct sur la page boutique.
+ * 4. L'ensemble de la logique du panier d'achat.
  * =================================================================
  */
 document.addEventListener('DOMContentLoaded', function() {
@@ -31,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // URL de base de l'API (définie dans footer.php pour plus de robustesse)
+    // URL de base de l'API (définie dans footer.php pour la robustesse)
     const API_BASE = (typeof API_BASE_URL !== 'undefined') ? API_BASE_URL : 'api/';
 
 
@@ -41,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const openFiltersBtn = document.getElementById('open-filters-btn');
     const closeFiltersBtn = document.getElementById('close-filters-btn');
     const filterOverlay = document.getElementById('filter-overlay');
-
     function openFilters() { document.body.classList.add('filters-open'); }
     function closeFilters() { document.body.classList.remove('filters-open'); }
 
@@ -54,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 3. LOGIQUE DE LA RECHERCHE EN DIRECT (PAGE BOUTIQUE)
     // -----------------------------------------------------------------
     const searchInput = document.querySelector('.shop-controls .search-bar input');
-    const productGrid = document.querySelector('.product-grid'); // Partagé avec la logique panier
+    const productGrid = document.querySelector('.product-grid'); // Élément partagé avec la logique panier
     let searchTimeout;
 
     if (searchInput && productGrid) {
@@ -76,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 } else if (searchTerm.length === 0) {
                     window.location.href = 'boutique.php';
                 }
-            }, 300);
+            }, 300); // Délai de 300ms avant de lancer la recherche
         });
     }
 
@@ -88,76 +89,49 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function postToApi(data) {
         try {
-            const response = await fetch(cartApiUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            });
-            if (!response.ok) {
-                console.error('Erreur serveur:', response.status, await response.text());
-                return { success: false, message: 'Erreur côté serveur.' };
-            }
+            const response = await fetch(cartApiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+            if (!response.ok) { console.error('Erreur serveur:', response.status, await response.text()); return { success: false, message: 'Erreur serveur.' }; }
             return await response.json();
-        } catch (error) {
-            console.error('Erreur de communication API:', error);
-            return { success: false, message: 'Erreur de communication avec le serveur.' };
-        }
+        } catch (error) { console.error('Erreur API:', error); return { success: false, message: 'Erreur de communication.' }; }
     }
-
+    
     function updateCartBadge(count) {
         const wrapper = document.querySelector('.cart-icon-wrapper');
         if (!wrapper) return;
         let badge = wrapper.querySelector('.cart-badge');
         if (count > 0) {
-            if (!badge) {
-                badge = document.createElement('span');
-                badge.className = 'cart-badge';
-                wrapper.appendChild(badge);
-            }
+            if (!badge) { badge = document.createElement('span'); badge.className = 'cart-badge'; wrapper.appendChild(badge); }
             badge.textContent = count;
-        } else if (badge) {
-            badge.remove();
-        }
+        } else if (badge) { badge.remove(); }
     }
 
-    // 4.1. Logique d'ajout au panier depuis la PAGE BOUTIQUE (Corrigée)
+    // 4.1. Ajout au panier depuis la PAGE BOUTIQUE
     if (productGrid) {
         productGrid.addEventListener('click', async (e) => {
             const clickedButton = e.target.closest('.add-to-cart');
-            if (!clickedButton) return; // Si on a cliqué ailleurs, on sort
-
+            if (!clickedButton) return;
             const productId = clickedButton.dataset.id;
             const card = clickedButton.closest('.product-card');
             const mainActionButton = card.querySelector('.product-purchase-info .add-to-cart');
-
-            // On ne fait rien si le bouton principal n'existe plus (déjà transformé)
             if (!mainActionButton) return;
-
-            // Désactiver le bouton principal pour l'effet visuel
             mainActionButton.disabled = true;
             mainActionButton.textContent = '...';
-            
-            // Appeler l'API pour ajouter le produit
             const result = await postToApi({ action: 'add', productId, quantity: 1 });
-
             if (result.success) {
                 updateCartBadge(result.cartItemCount);
-                
-                // Transformer le bouton principal en lien vers le panier
                 const purchaseInfoDiv = mainActionButton.closest('.product-purchase-info');
                 const priceHTML = purchaseInfoDiv.querySelector('.product-price').outerHTML;
                 const newButtonHTML = `<a href="panier.php" class="btn-cart-action in-cart"><span class="cart-icon-btn"></span> (1)</a>`;
                 purchaseInfoDiv.innerHTML = priceHTML + newButtonHTML;
             } else {
-                // En cas d'erreur, réactiver le bouton principal
                 mainActionButton.disabled = false;
                 mainActionButton.textContent = '+ Ajouter';
-                alert(result.message || 'Une erreur est survenue.');
+                alert(result.message || 'Erreur.');
             }
         });
     }
 
-    // 4.2. Logique d'ajout au panier depuis la PAGE DÉTAIL PRODUIT
+    // 4.2. Ajout au panier depuis la PAGE DÉTAIL PRODUIT
     const productPage = document.querySelector('.product-page-container');
     if (productPage) {
         const quantityDisplay = document.getElementById('quantity-display');
@@ -165,18 +139,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const minusBtn = productPage.querySelector('.quantity-btn-detail.minus');
         const addToCartBtn = document.getElementById('add-to-cart-btn');
         let currentQuantity = 1;
-
         if (plusBtn) plusBtn.addEventListener('click', () => { currentQuantity++; quantityDisplay.textContent = currentQuantity; });
         if (minusBtn) minusBtn.addEventListener('click', () => { if (currentQuantity > 1) { currentQuantity--; quantityDisplay.textContent = currentQuantity; } });
-        
         if (addToCartBtn) {
             addToCartBtn.addEventListener('click', async () => {
                 const productId = addToCartBtn.dataset.id;
                 addToCartBtn.disabled = true;
                 addToCartBtn.textContent = 'Ajout en cours...';
-
                 const result = await postToApi({ action: 'add', productId, quantity: currentQuantity });
-
                 if (result.success) {
                     updateCartBadge(result.cartItemCount);
                     addToCartBtn.textContent = '✓ Ajouté au panier !';
@@ -189,16 +159,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 } else {
                     addToCartBtn.disabled = false;
                     addToCartBtn.innerHTML = '🛒 Ajouter au panier';
-                    alert(result.message || 'Une erreur est survenue.');
+                    alert(result.message || 'Erreur.');
                 }
             });
         }
     }
 
-    // 4.3. Logique de gestion de la PAGE PANIER
+    // 4.3. Gestion de la PAGE PANIER
     const cartPage = document.querySelector('.cart-page');
     if (cartPage) {
         function reloadCartPage() { window.location.reload(); }
+        
         cartPage.addEventListener('click', async (e) => {
             const target = e.target;
             const cartItem = target.closest('.cart-item');
@@ -208,7 +179,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 let quantity = parseInt(cartItem.querySelector('.quantity-input').value);
                 if (target.classList.contains('plus')) quantity++;
                 else if (target.classList.contains('minus')) quantity--;
-                
                 cartItem.style.opacity = '0.5';
                 const action = (quantity < 1) ? 'remove' : 'update';
                 const result = await postToApi({ action, productId, quantity });
@@ -223,14 +193,67 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
             
-            if (target.matches('#clear-cart-link')) {
+            if (target.matches('#clear-cart-btn')) {
                 e.preventDefault();
                 if (confirm('Voulez-vous vraiment vider votre panier ?')) {
-                    document.querySelector('.cart-items-list').style.opacity = '0.5';
+                    document.querySelector('.cart-items-list-unified').style.opacity = '0.5';
                     const result = await postToApi({ action: 'clear' });
                     if(result.success) reloadCartPage();
                 }
             }
         });
+
+        // Logique pour le bouton de commande WhatsApp avec vidage automatique
+        const whatsappOrderBtn = document.getElementById('whatsapp-order-btn');
+        if (whatsappOrderBtn) {
+            whatsappOrderBtn.addEventListener('click', async function() {
+                const clientNameInput = document.getElementById('nom_complet');
+                const clientPhoneInput = document.getElementById('telephone');
+                let clientName = clientNameInput.value.trim();
+                let clientPhone = clientPhoneInput.value.trim();
+
+                if (clientName === '') {
+                    alert('Veuillez saisir votre nom complet pour passer la commande.');
+                    clientNameInput.focus();
+                    clientNameInput.style.borderColor = 'red';
+                    return;
+                } else {
+                    clientNameInput.style.borderColor = '';
+                }
+
+                if (typeof baseWhatsappMessage !== 'undefined' && typeof whatsappNumber !== 'undefined') {
+                    whatsappOrderBtn.disabled = true;
+                    whatsappOrderBtn.textContent = 'Préparation...';
+
+                    let finalMessage = baseWhatsappMessage
+                        .replace('%CLIENT_NAME%', clientName)
+                        .replace('%CLIENT_PHONE%', clientPhone || 'Non spécifié');
+                    
+                    const cleanWhatsAppNumber = whatsappNumber.replace(/[^0-9]/g, '');
+                    const whatsappUrl = `https://wa.me/${cleanWhatsAppNumber}?text=${encodeURIComponent(finalMessage)}`;
+                    
+                    window.open(whatsappUrl, '_blank');
+
+                    try {
+                        await new Promise(resolve => setTimeout(resolve, 1500));
+                        const result = await postToApi({ action: 'clear' });
+                        if (result.success) {
+                            console.log('Panier vidé avec succès. Rechargement de la page.');
+                            reloadCartPage();
+                        } else {
+                            alert("La commande a été préparée, mais une erreur est survenue lors du vidage du panier.");
+                            whatsappOrderBtn.disabled = false;
+                            whatsappOrderBtn.textContent = 'Commander sur WhatsApp';
+                        }
+                    } catch (error) {
+                        console.error("Erreur lors de la tentative de vidage du panier:", error);
+                        whatsappOrderBtn.disabled = false;
+                        whatsappOrderBtn.textContent = 'Commander sur WhatsApp';
+                    }
+                } else {
+                    alert("Erreur: Données de commande manquantes. Veuillez rafraîchir la page.");
+                }
+            });
+        }
     }
 });

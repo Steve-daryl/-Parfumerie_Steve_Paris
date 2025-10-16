@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 /**
  * Fichier de connexion à la base de données.

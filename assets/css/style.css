@@ -1531,3 +1531,13 @@ body.filters-open .filter-panel {
     padding-bottom: 15px;
     border-bottom: 1px solid #eee;
 }
+/* Style pour le bouton "Vider le panier" */
+.clear-cart-btn {
+    background: none;
+    border: none;
+    color: #e74c3c;
+    font-size: 14px;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+}

@@ -1,5 +1,9 @@
 <?php
 
+mb_internal_encoding('UTF-8');
+mb_http_output('UTF-8');
+ini_set('default_charset', 'UTF-8');
+
 /**
  * Fichier de configuration générale.
  *

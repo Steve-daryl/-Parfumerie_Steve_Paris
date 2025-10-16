@@ -1,16 +1,20 @@
 <?php
 
 /**
- * En-tête commun à toutes les pages publiques du site.
+ * =================================================================
+ * EN-TÊTE DU SITE (VERSION FINALE AVEC FORÇAGE UTF-8)
+ * =================================================================
  */
+
+// CORRECTION DÉFINITIVE : Force l'encodage de la page en UTF-8
+// Cette ligne doit être la toute première chose envoyée au navigateur.
+header('Content-Type: text/html; charset=utf-8');
 
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../config/database.php';
 
-// Calcul du nombre total d'articles dans le panier depuis la session
 $cart_item_count = !empty($_SESSION['panier']) ? array_sum(array_column($_SESSION['panier'], 'quantite')) : 0;
 
-// Récupération des paramètres du site
 try {
     $stmt = $pdo->query("SELECT cle, valeur FROM parametres");
     $params = $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
@@ -19,7 +23,6 @@ try {
     $params = [];
 }
 
-// Définition du nom du site et de la page actuelle
 $site_name = e($params['site_nom'] ?? 'Parfumerie Steve Paris');
 $current_page = basename($_SERVER['PHP_SELF']);
 ?>
@@ -27,6 +30,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 <html lang="fr">
 
 <head>
+    <!-- La balise meta est une double sécurité pour le navigateur -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $site_name; ?></title>
@@ -39,12 +43,10 @@ $current_page = basename($_SERVER['PHP_SELF']);
 <body>
     <header class="main-header">
         <div class="container">
-            <!-- NOUVELLE STRUCTURE DU LOGO CORRIGÉE -->
             <a href="<?php echo BASE_URL; ?>" class="logo-link-v2">
                 <img src="<?php echo IMAGES_PATH; ?>logo.png" alt="Logo de <?php echo $site_name; ?>" class="logo-v2">
                 <span class="logo-text-v2"><?php echo $site_name; ?></span>
             </a>
-
             <nav class="main-nav">
                 <ul>
                     <li><a href="<?php echo BASE_URL; ?>index.php" class="<?php echo ($current_page == 'index.php') ? 'active' : ''; ?>">Accueil</a></li>
