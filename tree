@@ -10,6 +10,9 @@ Parfumerie_Steve_Paris/
 │   ├── footer.php           # Pied de page
 │   └── functions.php        # Fonctions utilitaires
 ├── admin/
+│   ├── delete_product.php   # Suppression d'un produit
+│   ├── alert.php            # Gestion des differents type d'alert de produit
+│   ├── add_product.php      # Ajout des produits
 │   ├── index.php            # Dashboard principal
 │   ├── login.php            # Connexion admin
 │   ├── produits.php         # Gestion produits
@@ -20,6 +23,9 @@ Parfumerie_Steve_Paris/
 ├── assets/
 │   ├── css/
 │   │   ├── login_admin.css  # Style de la page de connexion
+│   │   ├── add_product.css  # Style  de la page ajout de produit
+│   │   ├── dashboard_produits.css        # Style de 
+│   │   ├── dashboard_produits.css        # Style dashboard de gestion des produits
 │   │   ├── style.css        # Styles frontend
 │   │   └── admin.css        # Styles dashboard
 │   ├── js/
@@ -28,6 +34,8 @@ Parfumerie_Steve_Paris/
 │   └── images/
 │       └── uploads/         # Images produits
 ├── api/
-│   ├── products.php         # API produits
+│   ├── recherche_produits.php         # logique de recherche de produit
+│   ├── panier_action.php         # logique du panier
+│   ├── produits.php         # API produits
 │   └── orders.php           # API commandes
 └── database.sql             # Structure BDD
