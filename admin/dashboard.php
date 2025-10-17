@@ -5,10 +5,73 @@ if(!isset($_SESSION['administrateurs_id'])){
     header('Location: login.php');
 }
 
+// Compter les produits en rupture de stock (statut = 'rupture' ou stock = 0, et actif = 1)
+$sql_rupture = "SELECT COUNT(*) as count FROM produits WHERE (statut = 'rupture' OR stock = 0) AND actif = 1";
+$stmt_rupture = $pdo->prepare($sql_rupture);
+$stmt_rupture->execute();
+$rupture_count = $stmt_rupture->fetch(PDO::FETCH_ASSOC)['count'];
+
+// Compter les produits expirés (date_de_peremption < date actuelle, et actif = 1)
+$sql_expire = "SELECT COUNT(*) as count FROM produits WHERE date_de_peremption < CURDATE() AND actif = 1";
+$stmt_expire = $pdo->prepare($sql_expire);
+$stmt_expire->execute();
+$expire_count = $stmt_expire->fetch(PDO::FETCH_ASSOC)['count'];
+
+// Compter les produits en voie d'expiration (dans les 30 prochains jours, et actif = 1)
+$sql_en_voie = "SELECT COUNT(*) as count FROM produits WHERE date_de_peremption BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 30 DAY) AND actif = 1";
+$stmt_en_voie = $pdo->prepare($sql_en_voie);
+$stmt_en_voie->execute();
+$en_voie_count = $stmt_en_voie->fetch(PDO::FETCH_ASSOC)['count'];
+
+// Compter les produits en faible stock (stock entre 1 et 9, et actif = 1)
+$sql_faible = "SELECT COUNT(*) as count FROM produits WHERE stock > 0 AND stock < 3 AND actif = 1";
+$stmt_faible = $pdo->prepare($sql_faible);
+$stmt_faible->execute();
+$faible_count = $stmt_faible->fetch(PDO::FETCH_ASSOC)['count'];
+
+//Compter le nombre total de produit en stock
 $sql="SELECT COUNT(*) AS nombre_de_produits FROM produits;";
 $stmt_stock = $pdo->prepare($sql);
 $stmt_stock->execute();
 $produits = $stmt_stock->fetchAll();
+
+// different alert
+$low_stock_threshold = 3;
+$expiry_alert_days = 90;
+
+// Fetch top (first) out-of-stock product
+$sql_out_of_stock = "SELECT id, nom, reference, stock, date_de_peremption, image, marque
+                     FROM produits
+                     WHERE stock = 0 AND actif = 1
+                     ORDER BY nom ASC
+                     LIMIT 1";
+$stmt_out_of_stock = $pdo->prepare($sql_out_of_stock);
+$stmt_out_of_stock->execute();
+$out_of_stock_product = $stmt_out_of_stock->fetch(PDO::FETCH_ASSOC);
+
+// Fetch top (first) low-stock product
+$sql_low_stock = "SELECT id, nom, reference, stock, date_de_peremption, image, marque
+                  FROM produits
+                  WHERE stock > 0 AND stock <= :low_stock_threshold AND actif = 1
+                  ORDER BY nom ASC
+                  LIMIT 1";
+$stmt_low_stock = $pdo->prepare($sql_low_stock);
+$stmt_low_stock->bindParam(':low_stock_threshold', $low_stock_threshold, PDO::PARAM_INT);
+$stmt_low_stock->execute();
+$low_stock_product = $stmt_low_stock->fetch(PDO::FETCH_ASSOC);
+
+// Fetch top (first) near-expiry product
+$sql_near_expiry = "SELECT id, nom, reference, stock, date_de_peremption, image, marque
+                    FROM produits
+                    WHERE date_de_peremption IS NOT NULL
+                      AND date_de_peremption <= DATE_ADD(CURDATE(), INTERVAL :expiry_alert_days DAY)
+                      AND stock > 0 AND actif = 1
+                    ORDER BY date_de_peremption ASC
+                    LIMIT 1";
+$stmt_near_expiry = $pdo->prepare($sql_near_expiry);
+$stmt_near_expiry->bindParam(':expiry_alert_days', $expiry_alert_days, PDO::PARAM_INT);
+$stmt_near_expiry->execute();
+$near_expiry_product = $stmt_near_expiry->fetch(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -60,14 +123,24 @@ $produits = $stmt_stock->fetchAll();
             <div class="grid-layout">
                 <!-- Cartes principales -->
                 <div class="card main-card">
-                    <i class="fas fa-wallet icon-bg-blue"></i>
-                    <h3>Ventes mensuelles</h3>
-                    <p class="amount">219019 Fcfa</p>
+                    <i class="fas fa-boxes icon-bg-blue"></i>
+                    <h3>Produits en faible stock <br>(inferieur a 3)</h3>
+                    <p class="amount"><?php echo $faible_count;?> Unités</p>
                 </div>
                 <div class="card main-card">
-                    <i class="fas fa-users icon-bg-blue"></i>
-                    <h3>Nouveaux clients</h3>
-                    <p class="amount">22300 Fcfa</p>
+                    <i class="fas fa-boxes icon-bg-blue"></i>
+                    <h3>Produits en rupture de stock</h3>
+                    <p class="amount"><?php echo $rupture_count;?> Unités</p>
+                </div>
+                <div class="card main-card">
+                    <i class="fas fa-boxes icon-bg-blue"></i>
+                    <h3>Produits proche d'expiration</h3>
+                    <p class="amount"><?php echo $en_voie_count ;?>Unités</p>
+                </div>
+                <div class="card main-card">
+                    <i class="fas fa-boxes icon-bg-blue"></i>
+                    <h3>Produits déja expirés</h3>
+                    <p class="amount"><?php echo $expire_count ;?> Unités</p>
                 </div>
                 <div class="card main-card">
                     <i class="fas fa-boxes icon-bg-blue"></i>
@@ -75,11 +148,6 @@ $produits = $stmt_stock->fetchAll();
                     <?php foreach ($produits as $produit):?>
                         <p class="amount"><?= $produit['nombre_de_produits'];?> Unités</p>
                         <?php endforeach?>
-                </div>
-                <div class="card main-card">
-                    <i class="fas fa-shipping-fast icon-bg-blue"></i>
-                    <h3>Commandes en cours</h3>
-                    <p class="amount">191200 Fcfa</p>
                 </div>
 
                 <!-- Section Graphique Performance -->
@@ -95,11 +163,11 @@ $produits = $stmt_stock->fetchAll();
                 </div> -->
 
                 <!-- Section Produits Favoris -->
-                <div class="card favorite-products">
+                <!-- <div class="card favorite-products">
                     <h3>Mes Produits Favoris</h3>
-                    <div class="product-list">
+                    <div class="product-list">-->
                         <!-- Exemple de produit -->
-                        <div class="product-item">
+                        <!-- <div class="product-item">
                             <img src="path/to/perfume1.jpg" alt="Parfum">
                         </div>
                         <div class="product-item">
@@ -109,67 +177,49 @@ $produits = $stmt_stock->fetchAll();
                             <img src="path/to/perfume3.jpg" alt="Parfum">
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Section Alertes de Stock (Nouvelle section) -->
                 <div class="card stock-alerts">
                     <h3><i class="fas fa-exclamation-triangle"></i> Alertes de Stock</h3>
                     <div class="alert-list">
-                        <div class="alert-item low-stock">
-                            <p>Parfum "Éclat d'Amour" - Seulement 5 unités restantes.</p>
-                            <button class="btn-primary">Réapprovisionner</button>
-                        </div>
-                        <div class="alert-item out-of-stock">
-                            <p>Parfum "Nuit Étoilée" - En rupture de stock.</p>
-                            <button class="btn-secondary">Commander</button>
-                        </div>
-                        <div class="alert-item near-expiry">
-                            <p>Testeur "Fleur de Lys" - Expire dans 30 jours.</p>
-                            <button href='../admin/delete_product.php' class="btn-tertiary">Promouvoir</button>
-                        </div>
+                        <?php if ($low_stock_product): ?>
+                            <div class="alert-item low-stock">
+                                <p>Parfum "<?php echo htmlspecialchars($low_stock_product['nom']); ?>" - Seulement <?php echo $low_stock_product['stock']; ?> unités restantes.</p>
+                                <a href="edit_product.php?id=<?php echo $low_stock_product['id']; ?>" class="btn-primary">Réapprovisionner</a>
+                            </div>
+                        <?php endif; ?>
+                        <?php if ($out_of_stock_product): ?>
+                            <div class="alert-item out-of-stock">
+                                <p>Parfum "<?php echo htmlspecialchars($out_of_stock_product['nom']); ?>" - En rupture de stock.</p>
+                                <a href="edit_product.php?id=<?php echo $out_of_stock_product['id']; ?>" class="btn-secondary">Commander</a>
+                            </div>
+                        <?php endif; ?>
+                        <?php if ($near_expiry_product): ?>
+                            <?php
+                                $expiry_date = new DateTime($near_expiry_product['date_de_peremption']);
+                                $today = new DateTime();
+                                $interval = $today->diff($expiry_date);
+                                $days_left = $interval->days;
+                                if ($interval->invert) {
+                                    $days_left = -$days_left;
+                                }
+                                $expiry_text = ($days_left < 0) ? "Expiré il y a " . abs($days_left) . " jours." : "Expire dans " . $days_left . " jours.";
+                            ?>
+                            <div class="alert-item near-expiry">
+                                <p><?php echo htmlspecialchars($near_expiry_product['nom']); ?> - <?php echo $expiry_text; ?></p>
+                                <a href="edit_product.php?id=<?php echo $near_expiry_product['id']; ?>" class="btn-tertiary">Promouvoir</a>
+                            </div>
+                        <?php endif; ?>
+                        <?php if (!$low_stock_product && !$out_of_stock_product && !$near_expiry_product): ?>
+                            <div class="alert-item no-alert">
+                                <p>Aucune alerte de stock pour le moment.</p>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
 
-                <!-- Section Dernières Commandes -->
-                <!-- <div class="card orders-section">
-                    <h3>Dernières commandes</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Client</th>
-                                <th>Produit</th>
-                                <th>Date</th>
-                                <th>Montant</th>
-                                <th>Statut</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><img src="path/to/avatar1.jpg" class="avatar"> Jean Dupont</td>
-                                <td>Parfum N°5</td>
-                                <td>12/03/23</td>
-                                <td>$123.00</td>
-                                <td><span class="status delivered">Livré</span></td>
-                            </tr>
-                            <tr>
-                                <td><img src="path/to/avatar2.jpg" class="avatar"> Marie Curie</td>
-                                <td>Coffret Dior</td>
-                                <td>11/03/23</td>
-                                <td>$200.00</td>
-                                <td><span class="status pending">En attente</span></td>
-                            </tr>-->
-                            <!-- Plus de commandes -->
-                    <!--</tbody>
-                    </table>
-                </div> -->
-
-                <!-- Section Offre Spéciale -->
-                <!-- <div class="card special-offer">
-                    <h3>Offre Spéciale du mois</h3>
-                    <img src="path/to/offer-perfume.jpg" alt="Offre Parfum">
-                    <p>Offre à -20% sur les Parfums Floraux</p>
-                    <button class="btn-primary">Voir l'offre</button>
-                </div> -->
+                
             </div>
         </main>
     </div>
