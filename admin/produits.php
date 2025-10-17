@@ -67,7 +67,7 @@ $i=1;
             <header class="dashboard-header">
                 <h2>Gestion des Produits</h2>
                 <div class="search-bar">
-                    <form action="produits.php" method="GET">
+                    <form action="" method="GET">
                         <input type="text" name="search" placeholder="Rechercher un produit..." value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
                         <!-- <button type="submit"><i class="fas fa-search"></i></button> -->
                     </form>
