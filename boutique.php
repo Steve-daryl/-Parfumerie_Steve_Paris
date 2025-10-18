@@ -165,9 +165,16 @@ try {
                         </div>
                         <div class="product-purchase-info" data-product-id="<?php echo e($product['id']); ?>">
                             <p class="product-price"><?php echo format_price((float)$product['prix_vente']); ?></p>
+                            <!-- =================== MODIFICATION ICI =================== -->
+                            <!-- On vérifie le stock pour afficher le bon bouton -->
                             <?php if ($product['stock'] > 0) : ?>
+                                <!-- Si le stock est disponible, on affiche le bouton d'ajout normal -->
                                 <button class="btn-cart-action add-to-cart" data-id="<?php echo e($product['id']); ?>">+ Ajouter</button>
+                            <?php else: ?>
+                                <!-- Sinon, on affiche un bouton désactivé et non cliquable -->
+                                <button class="btn-cart-action" disabled>Rupture</button>
                             <?php endif; ?>
+                            <!-- ================= FIN DE LA MODIFICATION ================= -->
                         </div>
                     </div>
                 </div>

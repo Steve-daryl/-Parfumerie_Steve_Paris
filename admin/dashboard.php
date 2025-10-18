@@ -1,7 +1,7 @@
-<?php 
+<?php
 require_once("../config/database.php");
 session_start();
-if(!isset($_SESSION['administrateurs_id'])){
+if (!isset($_SESSION['administrateurs_id'])) {
     header('Location: login.php');
 }
 
@@ -30,7 +30,7 @@ $stmt_faible->execute();
 $faible_count = $stmt_faible->fetch(PDO::FETCH_ASSOC)['count'];
 
 //Compter le nombre total de produit en stock
-$sql="SELECT COUNT(*) AS nombre_de_produits FROM produits;";
+$sql = "SELECT COUNT(*) AS nombre_de_produits FROM produits;";
 $stmt_stock = $pdo->prepare($sql);
 $stmt_stock->execute();
 $produits = $stmt_stock->fetchAll();
@@ -75,6 +75,7 @@ $near_expiry_product = $stmt_near_expiry->fetch(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -86,6 +87,7 @@ $near_expiry_product = $stmt_near_expiry->fetch(PDO::FETCH_ASSOC);
     <!-- Pour les graphiques (ex: Chart.js) -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
     <div class="dashboard-container">
         <!-- Barre latérale -->
@@ -94,7 +96,12 @@ $near_expiry_product = $stmt_near_expiry->fetch(PDO::FETCH_ASSOC);
             <nav class="nav-links">
                 <ul>
                     <li><a href="../admin/dashboard.php" class="active" title="Tableau de bord"><i class="fas fa-th-large"></i></a></li>
-                    <li><a href="../admin/produits.php" title="Gestion des produits"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-package w-5 h-5" aria-hidden="true"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"></path><path d="M12 22V12"></path><polyline points="3.29 7 12 12 20.71 7"></polyline><path d="m7.5 4.27 9 5.15"></path></svg><!-- <i class="fas fa-chart-line"></i> --></a></li>
+                    <li><a href="../admin/produits.php" title="Gestion des produits"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-package w-5 h-5" aria-hidden="true">
+                                <path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"></path>
+                                <path d="M12 22V12"></path>
+                                <polyline points="3.29 7 12 12 20.71 7"></polyline>
+                                <path d="m7.5 4.27 9 5.15"></path>
+                            </svg><!-- <i class="fas fa-chart-line"></i> --></a></li>
                     <li><a href="../admin/alert.php"><i class="fas fa-bell"></i></a></li>
                     <!-- <li><a href="#"><i class="fas fa-cog"></i></a></li> -->
                     <li><a href="../admin/logout.php"><i class="fas fa-sign-out-alt"></i></a></li>
@@ -106,10 +113,10 @@ $near_expiry_product = $stmt_near_expiry->fetch(PDO::FETCH_ASSOC);
         <main class="main-content">
             <header class="dashboard-header">
                 <h2>Tableau de bord Steve Paris</h2>
-                <div class="search-bar">
+                <!-- <div class="search-bar">
                     <input type="text" placeholder="Rechercher transaction, article, etc...">
                     <i class="fas fa-search"></i>
-                </div>
+                </div> -->
                 <div class="header-icons">
                     <a href="../index.php"><i class="fas fa-users icon-bg-blue" title="Interface client"></i></a>
                     <!-- <i class="fas fa-bell"></i> -->
@@ -125,29 +132,29 @@ $near_expiry_product = $stmt_near_expiry->fetch(PDO::FETCH_ASSOC);
                 <div class="card main-card">
                     <i class="fas fa-boxes icon-bg-blue"></i>
                     <h3>Produits en faible stock <br>(inferieur a 3)</h3>
-                    <p class="amount"><?php echo $faible_count;?> Unités</p>
+                    <p class="amount"><?php echo $faible_count; ?> Unités</p>
                 </div>
                 <div class="card main-card">
                     <i class="fas fa-boxes icon-bg-blue"></i>
                     <h3>Produits en rupture de stock</h3>
-                    <p class="amount"><?php echo $rupture_count;?> Unités</p>
+                    <p class="amount"><?php echo $rupture_count; ?> Unités</p>
                 </div>
                 <div class="card main-card">
                     <i class="fas fa-boxes icon-bg-blue"></i>
                     <h3>Produits proche d'expiration</h3>
-                    <p class="amount"><?php echo $en_voie_count ;?>Unités</p>
+                    <p class="amount"><?php echo $en_voie_count; ?>Unités</p>
                 </div>
                 <div class="card main-card">
                     <i class="fas fa-boxes icon-bg-blue"></i>
                     <h3>Produits déja expirés</h3>
-                    <p class="amount"><?php echo $expire_count ;?> Unités</p>
+                    <p class="amount"><?php echo $expire_count; ?> Unités</p>
                 </div>
                 <div class="card main-card">
                     <i class="fas fa-boxes icon-bg-blue"></i>
                     <h3>Stock total</h3>
-                    <?php foreach ($produits as $produit):?>
-                        <p class="amount"><?= $produit['nombre_de_produits'];?> Unités</p>
-                        <?php endforeach?>
+                    <?php foreach ($produits as $produit): ?>
+                        <p class="amount"><?= $produit['nombre_de_produits']; ?> Unités</p>
+                    <?php endforeach ?>
                 </div>
 
                 <!-- Section Graphique Performance -->
@@ -166,8 +173,8 @@ $near_expiry_product = $stmt_near_expiry->fetch(PDO::FETCH_ASSOC);
                 <!-- <div class="card favorite-products">
                     <h3>Mes Produits Favoris</h3>
                     <div class="product-list">-->
-                        <!-- Exemple de produit -->
-                        <!-- <div class="product-item">
+                <!-- Exemple de produit -->
+                <!-- <div class="product-item">
                             <img src="path/to/perfume1.jpg" alt="Parfum">
                         </div>
                         <div class="product-item">
@@ -197,14 +204,14 @@ $near_expiry_product = $stmt_near_expiry->fetch(PDO::FETCH_ASSOC);
                         <?php endif; ?>
                         <?php if ($near_expiry_product): ?>
                             <?php
-                                $expiry_date = new DateTime($near_expiry_product['date_de_peremption']);
-                                $today = new DateTime();
-                                $interval = $today->diff($expiry_date);
-                                $days_left = $interval->days;
-                                if ($interval->invert) {
-                                    $days_left = -$days_left;
-                                }
-                                $expiry_text = ($days_left < 0) ? "Expiré il y a " . abs($days_left) . " jours." : "Expire dans " . $days_left . " jours.";
+                            $expiry_date = new DateTime($near_expiry_product['date_de_peremption']);
+                            $today = new DateTime();
+                            $interval = $today->diff($expiry_date);
+                            $days_left = $interval->days;
+                            if ($interval->invert) {
+                                $days_left = -$days_left;
+                            }
+                            $expiry_text = ($days_left < 0) ? "Expiré il y a " . abs($days_left) . " jours." : "Expire dans " . $days_left . " jours.";
                             ?>
                             <div class="alert-item near-expiry">
                                 <p><?php echo htmlspecialchars($near_expiry_product['nom']); ?> - <?php echo $expiry_text; ?></p>
@@ -219,11 +226,12 @@ $near_expiry_product = $stmt_near_expiry->fetch(PDO::FETCH_ASSOC);
                     </div>
                 </div>
 
-                
+
             </div>
         </main>
     </div>
 
     <script src="../assets/js/admin.js"></script>
 </body>
+
 </html>

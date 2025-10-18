@@ -1541,3 +1541,29 @@ body.filters-open .filter-panel {
     cursor: pointer;
     padding: 0;
 }
+/* -----------------------------------------------------------------
+   9. Styles pour les icônes d'informations produit (SVG)
+   ----------------------------------------------------------------- */
+
+.spec-item .spec-icon {
+    /* Conteneur pour l'icône */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0; /* Empêche l'icône de rétrécir */
+}
+
+.spec-icon svg {
+    /* Style de l'icône SVG elle-même */
+    width: 28px; /* Taille de l'icône */
+    height: 28px;
+    stroke: var(--color-accent); /* Couleur de la ligne de l'icône (notre couleur 'or') */
+    stroke-width: 1.5; /* Épaisseur de la ligne */
+}
+
+/* On s'assure que le flexbox est bien appliqué pour l'alignement */
+.spec-item {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espace entre l'icône et le texte */
+}

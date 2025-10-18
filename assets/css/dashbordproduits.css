@@ -1,33 +1,33 @@
-/* css/dashbordproduit.css - Thème Luxe Amélioré pour Gestion des Produits */
+/* css/dashbordproduits.css - Thème Luxe Amélioré pour Gestion des Produits */
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500&display=swap');
 
 :root {
-    --bg-dark: #0F0F1A; /* Noir profond avec une touche navy pour l'élégance */
-    --card-dark: #1A1A2A; /* Velouté sombre, comme un cuir luxueux */
-    --text-light: #F5F5F5; /* Blanc cassé pour une douceur sophistiquée */
-    --text-muted: #B0B0B0; /* Gris argenté subtil */
-    --accent-gold: #D4AF37; /* Or chaleureux pour les accents luxueux */
-    --accent-gold-dark: #B8962E; /* Or plus foncé pour les hovers */
-    --success-emerald: #2D5A3A; /* Vert émeraude pour le succès */
-    --warning-amber: #DAA520; /* Ambre doré pour les alertes */
-    --danger-burgundy: #800020; /* Bordeaux profond pour les dangers */
+    --bg-dark: #0F0F1A;
+    --card-dark: #1A1A2A;
+    --text-light: #F5F5F5;
+    --text-muted: #B0B0B0;
+    --accent-gold: #D4AF37;
+    --accent-gold-dark: #B8962E;
+    --success-emerald: #2D5A3A;
+    --warning-amber: #DAA520;
+    --danger-burgundy: #800020;
     --status-delivered: #2D5A3A;
     --status-pending: #DAA520;
-    --status-shipped: #4682B4; /* Bleu royal pour l'expédition */
+    --status-shipped: #4682B4;
     --status-cancelled: #800020;
-    --border-gold: rgba(212, 175, 55, 0.3); /* Bordure or subtile */
-    --shadow-luxe: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(212, 175, 55, 0.1); /* Ombre profonde avec halo or */
-    --gradient-luxe: linear-gradient(135deg, #1A1A2A 0%, #0F0F1A 100%); /* Dégradé subtil pour profondeur */
+    --border-gold: rgba(212, 175, 55, 0.3);
+    --shadow-luxe: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(212, 175, 55, 0.1);
+    --gradient-luxe: linear-gradient(135deg, #1A1A2A 0%, #0F0F1A 100%);
 }
 
 body {
-    font-family: 'Poppins', sans-serif; /* Corps léger et moderne */
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     background: var(--gradient-luxe);
     color: var(--text-light);
-    line-height: 1.7; /* Espacement plus généreux pour l'élégance */
+    line-height: 1.7;
 }
 
 .dashboard-container {
@@ -35,8 +35,7 @@ body {
     min-height: 100vh;
 }
 
-
-/* Main Content - Padding plus généreux */
+/* Main Content */
 .main-content {
     flex-grow: 1;
     padding: 40px;
@@ -54,14 +53,15 @@ body {
 .dashboard-header h2 {
     margin: 0;
     font-family: 'Playfair Display', serif;
-    font-size: 2.2em; /* Plus grand pour impact */
+    font-size: 2.2em;
     color: var(--text-light);
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+/* Barre de recherche */
 .search-bar {
     position: relative;
-    width: 350px; /* Plus large pour élégance */
+    width: 350px;
     display: flex;
     align-items: center;
 }
@@ -74,9 +74,9 @@ body {
 
 .search-bar input {
     flex-grow: 1;
-    padding: 15px 20px 15px 50px; /* Padding plus généreux */
+    padding: 15px 20px 15px 50px;
     border: 1px solid var(--border-gold);
-    border-radius: 25px 0 0 25px; /* Arrondi à gauche */
+    border-radius: 25px 0 0 25px;
     background-color: var(--card-dark);
     color: var(--text-light);
     font-size: 1em;
@@ -101,7 +101,7 @@ body {
     padding: 15px 20px;
     border: 1px solid var(--border-gold);
     border-left: none;
-    border-radius: 0 25px 25px 0; /* Arrondi à droite */
+    border-radius: 0 25px 25px 0;
     background-color: var(--card-dark);
     color: var(--accent-gold);
     cursor: pointer;
@@ -117,10 +117,7 @@ body {
     box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
 }
 
-.search-bar button i {
-    font-size: 1.1em;
-}
-
+/* Icônes d’en-tête */
 .header-icons {
     display: flex;
     align-items: center;
@@ -142,6 +139,7 @@ body {
     transform: scale(1.1);
 }
 
+/* Profil utilisateur */
 .user-profile img {
     width: 50px;
     height: 50px;
@@ -157,7 +155,7 @@ body {
     transform: scale(1.1);
 }
 
-/* Styles spécifiques pour la gestion des produits */
+/* Gestion Produits */
 .products-management {
     margin-bottom: 40px;
 }
@@ -168,6 +166,7 @@ body {
     justify-content: flex-start;
 }
 
+/* Boutons */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -195,16 +194,6 @@ body {
     box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
 }
 
-.btn i {
-    margin-right: 8px;
-    font-size: 1.1em;
-}
-
-.btn-sm {
-    padding: 6px 12px;
-    font-size: 0.85em;
-}
-
 .btn-info {
     background: linear-gradient(135deg, var(--status-shipped), #36648B);
     color: white;
@@ -229,11 +218,11 @@ body {
     box-shadow: 0 4px 12px rgba(128, 0, 32, 0.4);
 }
 
-/* Card pour la liste des produits */
+/* Carte Produits */
 .product-list-card {
     background: var(--gradient-luxe);
     padding: 30px;
-    border-radius: 16px; /* Coins plus doux */
+    border-radius: 16px;
     box-shadow: var(--shadow-luxe);
     border: 1px solid var(--border-gold);
     transition: all 0.3s ease;
@@ -256,21 +245,7 @@ body {
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(212, 175, 55, 0.2);
 }
 
-.product-list-card h3 {
-    margin-top: 0;
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4em; /* Plus élégant */
-    color: var(--text-light);
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-}
-
-.product-list-card h3 .fas {
-    margin-right: 12px;
-    color: var(--accent-gold); /* Or pour les icônes d'alertes */
-}
-
+/* Tableau Produits */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -281,8 +256,7 @@ table {
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-th,
-td {
+th, td {
     padding: 15px 20px;
     text-align: left;
     border-bottom: 1px solid var(--border-gold);
@@ -290,17 +264,15 @@ td {
 
 th {
     color: var(--accent-gold);
-    font-size: 0.95em;
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-weight: 500;
 }
 
 td {
     color: var(--text-light);
-    font-size: 1em;
 }
 
+/* Miniature */
 .product-thumb {
     width: 50px;
     height: 50px;
@@ -315,77 +287,261 @@ td {
     transform: scale(1.1);
 }
 
-/* Responsive adjustments - Adaptées pour luxe mobile */
+/* === INDICATEURS DE STOCK === */
+.stock-indicator {
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-weight: 500;
+    font-size: 0.85em;
+    color: var(--bg-dark);
+    text-align: center;
+    min-width: 60px;
+    display: inline-block;
+    text-shadow: none;
+}
+
+.stock-ok {
+    background-color: var(--success-emerald);
+    color: #e0f0e3;
+    box-shadow: 0 2px 5px rgba(45, 90, 58, 0.4);
+}
+
+.stock-low {
+    background-color: var(--warning-amber);
+    color: var(--bg-dark);
+    box-shadow: 0 2px 5px rgba(218, 165, 32, 0.4);
+}
+
+.stock-zero {
+    background-color: var(--danger-burgundy);
+    color: #f5e6e9;
+    box-shadow: 0 2px 5px rgba(128, 0, 32, 0.4);
+}
+
+#products-table-body td {
+    transition: background-color 0.3s ease;
+}
+
+/* === Responsive === */
 @media (max-width: 1200px) {
-    .main-content {
-        padding: 30px;
-    }
+    .main-content { padding: 30px; }
 }
 
 @media (max-width: 900px) {
-    .dashboard-header {
-        flex-wrap: wrap;
-        gap: 15px;
-    }
-    .search-bar {
-        order: 3;
-        width: 100%;
-        margin-top: 15px;
-    }
-    .search-bar form {
-        flex-direction: column;
-    }
-    .search-bar input {
-        border-radius: 25px;
-        border-right: 1px solid var(--border-gold);
-        margin-bottom: 10px;
-    }
-    .search-bar button {
-        border-radius: 25px;
-        border-left: 1px solid var(--border-gold);
-        width: 100%;
-    }
-    .action-buttons {
-        justify-content: center;
-    }
-    table {
-        font-size: 0.9em;
-    }
-    th,
-    td {
-        padding: 10px 15px;
-    }
+    .dashboard-header { flex-wrap: wrap; gap: 15px; }
+    .search-bar { order: 3; width: 100%; margin-top: 15px; }
+    .search-bar form { flex-direction: column; }
+    .search-bar input { border-radius: 25px; border-right: 1px solid var(--border-gold); margin-bottom: 10px; }
+    .search-bar button { border-radius: 25px; border-left: 1px solid var(--border-gold); width: 100%; }
+    .action-buttons { justify-content: center; }
+    table { font-size: 0.9em; }
+    th, td { padding: 10px 15px; }
 }
 
 @media (max-width: 600px) {
-    .sidebar {
-        width: 70px;
-        padding: 15px 0;
+    .sidebar { width: 70px; padding: 15px 0; }
+    .sidebar .nav-links li { margin-bottom: 25px; }
+    .main-content { padding: 20px; }
+    .dashboard-header h2 { font-size: 1.8em; }
+    .header-icons i { margin-left: 15px; font-size: 1.3em; }
+    table { overflow-x: auto; display: block; white-space: nowrap; }
+    .product-thumb { width: 40px; height: 40px; }
+}
+/* ==========================================================================
+   STYLE POUR LE PANNEAU DE FILTRES DYNAMIQUE
+   ========================================================================== */
+
+/* Arrière-plan assombri quand le panneau est ouvert */
+.filter-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.filter-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Le panneau de filtres lui-même */
+.filter-panel {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Commence caché à l'extérieur de l'écran */
+    width: 320px;
+    height: 100%;
+    background-color: var(--card-dark);
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+    transition: right 0.4s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid var(--border-gold);
+}
+
+.filter-panel.active {
+    right: 0; /* Glisse pour devenir visible */
+}
+
+/* En-tête du panneau */
+.filter-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    border-bottom: 1px solid var(--border-gold);
+}
+
+.filter-panel-header h2 {
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5em;
+    color: var(--accent-gold);
+}
+
+.filter-panel-header .close-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 2em;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+.filter-panel-header .close-btn:hover {
+    color: var(--text-light);
+    transform: rotate(90deg);
+}
+
+/* Corps du panneau avec les filtres */
+.filter-panel-body {
+    padding: 25px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.filter-group {
+    margin-bottom: 25px;
+}
+
+.filter-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: var(--text-muted);
+    font-size: 0.9em;
+    text-transform: uppercase;
+}
+
+.filter-select {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    border: 1px solid var(--border-gold);
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+}
+.filter-select:focus {
+    outline: none;
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.3);
+}
+
+/* Bouton pour réinitialiser */
+.btn-reset-filters {
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    border: 1px solid var(--danger-burgundy);
+    color: var(--danger-burgundy);
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 20px;
+}
+.btn-reset-filters:hover {
+    background-color: var(--danger-burgundy);
+    color: white;
+}
+/* ==========================================================================
+   STYLE POUR LA BARRE DE CONTRÔLES SUPÉRIEURE (Alignement)
+   ========================================================================== */
+
+.top-bar-controls {
+    display: flex;
+    justify-content: space-between; /* Pousse les éléments aux extrémités */
+    align-items: center; /* Centre verticalement */
+    margin-bottom: 30px; /* Espace avant la liste des produits */
+    flex-wrap: wrap; /* Permet le passage à la ligne sur petits écrans */
+    gap: 20px; /* Espace entre les éléments s'ils passent à la ligne */
+}
+
+.search-and-filter {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espace entre la recherche et le bouton filtre */
+}
+
+
+/* ==========================================================================
+   AMÉLIORATION ESTHÉTIQUE DU BOUTON FILTRES
+   ========================================================================== */
+
+.filter-button {
+    padding: 14px 22px; /* Un peu plus grand pour un meilleur clic */
+    border-radius: 25px; /* Harmonisé avec le bouton "Ajouter" */
+    border: 1px solid var(--border-gold);
+    background-color: transparent; /* Fond transparent par défaut */
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.95em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+}
+
+.filter-button i {
+    font-size: 1em;
+    transition: transform 0.3s ease;
+}
+
+.filter-button:hover {
+    background-color: var(--accent-gold);
+    color: var(--bg-dark); /* Texte sombre sur fond or */
+    border-color: var(--accent-gold);
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
+    transform: translateY(-2px); /* Léger effet de soulèvement */
+}
+
+.filter-button:hover i {
+    transform: rotate(15deg); /* Animation sur l'icône */
+}
+
+/* Responsive pour les contrôles */
+@media (max-width: 768px) {
+    .top-bar-controls {
+        flex-direction: column; /* Passe en colonne sur mobile */
+        align-items: stretch; /* Les éléments prennent toute la largeur */
     }
-    .sidebar .nav-links li {
-        margin-bottom: 25px;
+
+    .search-and-filter {
+        width: 100%;
+        flex-direction: column;
     }
-    .main-content {
-        padding: 20px;
-    }
-    .dashboard-header h2 {
-        font-size: 1.8em;
-    }
-    .header-icons i {
-        margin-left: 15px;
-        font-size: 1.3em;
-    }
-    .search-bar input,
-    .search-bar button {
-        padding: 12px 15px;
-    }
-    table {
-        overflow-x: auto;
-        display: block;
-        white-space: nowrap;
-    }
-    .product-thumb {
-        width: 40px;
-        height: 40px;
+    
+    .search-bar {
+        width: 100%;
     }
 }
