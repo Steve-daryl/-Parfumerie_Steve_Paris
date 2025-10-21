@@ -1,0 +1,379 @@
+/* edit_product.css - Thème Luxe pour Formulaire d'Édition */
+
+/* Container du formulaire */
+.products-form-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.products-form-container .card {
+    background: var(--gradient-luxe);
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-luxe);
+    border: 1px solid var(--border-gold);
+    position: relative;
+    overflow: hidden;
+}
+
+.products-form-container .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+}
+
+.products-form-container .card:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(212, 175, 55, 0.2);
+}
+
+/* Messages d'alerte */
+.alert {
+    padding: 18px 25px;
+    border-radius: 12px;
+    margin-bottom: 35px;
+    font-size: 1em;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    animation: slideInAlert 0.5s ease;
+    border: 1px solid;
+}
+
+@keyframes slideInAlert {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.alert::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    margin-right: 15px;
+    font-size: 1.3em;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, rgba(45, 90, 58, 0.25), rgba(45, 90, 58, 0.15));
+    border-left: 5px solid var(--success-emerald);
+    border-color: rgba(45, 90, 58, 0.4);
+    color: #8FE5A8;
+}
+
+.alert-success::before {
+    content: "\f058";
+    color: var(--success-emerald);
+}
+
+.alert-error {
+    background: linear-gradient(135deg, rgba(128, 0, 32, 0.25), rgba(128, 0, 32, 0.15));
+    border-left: 5px solid var(--danger-burgundy);
+    border-color: rgba(128, 0, 32, 0.4);
+    color: #FFB3B3;
+}
+
+.alert-error::before {
+    content: "\f06a";
+    color: var(--danger-burgundy);
+}
+
+/* Formulaire - Layout en grille pour deux colonnes */
+form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    row-gap: 35px;
+}
+
+/* Description et Image occupent toute la largeur */
+form .form-group:has(textarea),
+form .form-group:has(.current-product-image),
+form .form-actions {
+    grid-column: span 2;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+}
+
+.form-group label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95em;
+    font-weight: 500;
+    color: var(--accent-gold);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Tous les champs de formulaire */
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group textarea,
+.form-group input[type="file"] {
+    padding: 15px 20px;
+    border: 1px solid var(--border-gold);
+    border-radius: 12px;
+    background-color: var(--card-dark);
+    color: var(--text-light);
+    font-size: 1em;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="number"]:focus,
+.form-group input[type="date"]:focus,
+.form-group textarea:focus,
+.form-group input[type="file"]:focus {
+    outline: none;
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+    transform: scale(1.01);
+    background-color: rgba(26, 26, 42, 0.9);
+}
+
+.form-group input[type="text"]:hover,
+.form-group input[type="number"]:hover,
+.form-group input[type="date"]:hover,
+.form-group textarea:hover {
+    border-color: rgba(212, 175, 55, 0.5);
+}
+
+/* Textarea spécifique */
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.6;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Placeholders */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--text-muted);
+    font-style: italic;
+    opacity: 0.7;
+}
+
+/* Input de type date - Personnalisation */
+.form-group input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1) brightness(0.8) sepia(1) hue-rotate(10deg) saturate(3);
+    cursor: pointer;
+}
+
+/* Input de type file stylisé */
+.form-group input[type="file"] {
+    padding: 12px 15px;
+    cursor: pointer;
+    background: linear-gradient(135deg, var(--card-dark) 0%, rgba(26, 26, 42, 0.5) 100%);
+    position: relative;
+}
+
+.form-group input[type="file"]::file-selector-button {
+    padding: 10px 22px;
+    border: 1px solid var(--accent-gold);
+    border-radius: 20px;
+    background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-dark));
+    color: #1A1A2A;
+    font-weight: 500;
+    font-size: 0.9em;
+    cursor: pointer;
+    margin-right: 15px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.form-group input[type="file"]::file-selector-button:hover {
+    background: linear-gradient(135deg, var(--accent-gold-dark), var(--accent-gold));
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+}
+
+/* Image actuelle du produit */
+.current-product-image {
+    margin: 15px 0 20px 0;
+    border-radius: 12px;
+    border: 2px solid var(--border-gold);
+    box-shadow: var(--shadow-luxe);
+    transition: all 0.3s ease;
+    max-width: 250px;
+    height: auto;
+    display: block;
+}
+
+.current-product-image:hover {
+    transform: scale(1.05) rotate(1deg);
+    border-color: var(--accent-gold);
+    box-shadow: 0 12px 32px rgba(212, 175, 55, 0.4);
+}
+
+/* Actions du formulaire */
+.form-actions {
+    display: flex;
+    gap: 20px;
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 1px solid var(--border-gold);
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* Boutons */
+.btn {
+    padding: 15px 35px;
+    border: 1px solid transparent;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn i {
+    font-size: 1.1em;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-dark));
+    color: #1A1A2A;
+    border-color: var(--accent-gold);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--accent-gold-dark), var(--accent-gold));
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border-gold);
+}
+
+.btn-secondary:hover {
+    background: rgba(176, 176, 176, 0.1);
+    color: var(--text-light);
+    border-color: var(--text-light);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(176, 176, 176, 0.2);
+}
+
+/* Effet de focus sur le formulaire entier */
+form:focus-within .card::before {
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Responsive pour le formulaire */
+@media (max-width: 1024px) {
+    .products-form-container {
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    .products-form-container .card {
+        padding: 40px 35px;
+    }
+
+    form {
+        gap: 25px;
+        row-gap: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .products-form-container .card {
+        padding: 30px 25px;
+    }
+
+    form {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    form .form-group:has(textarea),
+    form .form-group:has(.current-product-image),
+    form .form-actions {
+        grid-column: span 1;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .current-product-image {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .products-form-container .card {
+        padding: 25px 20px;
+        border-radius: 16px;
+    }
+
+    .form-group label {
+        font-size: 0.85em;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="number"],
+    .form-group input[type="date"],
+    .form-group textarea,
+    .form-group input[type="file"] {
+        padding: 12px 15px;
+        font-size: 0.95em;
+    }
+
+    .btn {
+        padding: 12px 25px;
+        font-size: 0.9em;
+    }
+
+    .form-group input[type="file"]::file-selector-button {
+        padding: 8px 16px;
+        font-size: 0.85em;
+    }
+}
