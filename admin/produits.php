@@ -129,6 +129,7 @@ try {
                                 <th>Image</th>
                                 <th>Nom</th>
                                 <th>Description</th>
+                                <th>Categorie</th>
                                 <th>Prix</th>
                                 <th>Stock</th>
                                 <th>Actions</th>

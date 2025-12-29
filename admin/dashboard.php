@@ -96,12 +96,10 @@ $near_expiry_product = $stmt_near_expiry->fetch(PDO::FETCH_ASSOC);
             <nav class="nav-links">
                 <ul>
                     <li><a href="../admin/dashboard.php" class="active" title="Tableau de bord"><i class="fas fa-th-large"></i></a></li>
-                    <li><a href="../admin/produits.php" title="Gestion des produits"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-package w-5 h-5" aria-hidden="true">
-                                <path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"></path>
-                                <path d="M12 22V12"></path>
-                                <polyline points="3.29 7 12 12 20.71 7"></polyline>
-                                <path d="m7.5 4.27 9 5.15"></path>
-                            </svg><!-- <i class="fas fa-chart-line"></i> --></a></li>
+                    <li><a href="../admin/produits.php" title="Gestion des produits">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-package"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5" /><path d="M12 12l8 -4.5" /><path d="M12 12l0 9" /><path d="M12 12l-8 -4.5" /><path d="M16 5.25l-8 4.5" /></svg>
+                        <!-- <i class="fas fa-chart-line"></i> --></a>
+                    </li>
                     <li><a href="../admin/alert.php"><i class="fas fa-bell"></i></a></li>
                     <!-- <li><a href="#"><i class="fas fa-cog"></i></a></li> -->
                     <li><a href="../admin/logout.php"><i class="fas fa-sign-out-alt"></i></a></li>

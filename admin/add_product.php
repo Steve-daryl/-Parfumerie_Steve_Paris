@@ -107,8 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajouter un Produit - Dashboard</title>
-    <link rel="stylesheet" href="../assets/css/admin.css">
-    <link rel="stylesheet" href="../assets/css/add_product.css">
+    <link rel="stylesheet" href="../assets/css/add_product1.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -150,64 +149,95 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?php endif; ?>
 
                     <form action="add_product.php" method="POST" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <div class="form-group">
-                                <label for="nom">Nom du Produit:</label>
-                                <input type="text" id="nom" name="nom" required value="<?php echo htmlspecialchars($_POST['nom'] ?? ''); ?>">
-                             </div>
-                            <div class="form-group">
-                                <label for="reference">Référence:</label>
-                                <input type="text" id="reference" name="reference" required value="<?php echo htmlspecialchars($_POST['reference'] ?? ''); ?>">
-                             </div>
-                            <div class="form-group">   
-                                <label for="marque">Marque:</label>
-                                <input type="text" id="marque" name="marque" required value="<?php echo htmlspecialchars($_POST['marque'] ?? ''); ?>">
+                        <?php if ($message): ?>
+                            <div class="alert alert-<?php echo $message_type; ?>">
+                                <?php echo $message; ?>
                             </div>
-                            <div class="form-group">
-                                <label for="contenance">Contenance:</label>
-                                <input type="number" id="contenance" name="contenance" required value="<?php echo htmlspecialchars($_POST['contenance'] ?? ''); ?>">
+                        <?php endif; ?>
+
+                        <!-- Grille à 2 colonnes -->
+                        <div class="form-grid">
+
+                            <!-- Colonne 1 -->
+                            <div class="form-column">
+                                <div class="form-group">
+                                    <label for="nom">Nom du Produit</label>
+                                    <input type="text" id="nom" name="nom" required value="<?php echo htmlspecialchars($_POST['nom'] ?? ''); ?>">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="reference">Référence</label>
+                                    <input type="text" id="reference" name="reference" required value="<?php echo htmlspecialchars($_POST['reference'] ?? ''); ?>">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="marque">Marque</label>
+                                    <input type="text" id="marque" name="marque" value="<?php echo htmlspecialchars($_POST['marque'] ?? ''); ?>">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="contenance">Contenance (ml/g)</label>
+                                    <input type="number" id="contenance" name="contenance" value="<?php echo htmlspecialchars($_POST['contenance'] ?? ''); ?>">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="date_de_peremption">Date de Péremption</label>
+                                    <input type="date" id="date_de_peremption" name="date_de_peremption" value="<?php echo htmlspecialchars($_POST['date_de_peremption'] ?? ''); ?>">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="categorie">Catégorie</label>
+                                    <select name="categorie_id" id="categorie" required>
+                                        <option value="">Sélectionner une catégorie</option>
+                                        <?php foreach($categories_sql as $categorie): ?>
+                                            <option value="<?= htmlspecialchars($categorie['id']); ?>" <?= (isset($_POST['categorie_id']) && $_POST['categorie_id'] == $categorie['id']) ? 'selected' : ''; ?>>
+                                                <?= htmlspecialchars($categorie['nom']); ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="date_de_peremption">Date de Péremption:</label>
-                                <input type="date" id="date_de_peremption" name="date_de_peremption" required value="<?php echo htmlspecialchars($_POST['date_de_peremption'] ?? ''); ?>">
+
+                            <!-- Colonne 2 -->
+                            <div class="form-column">
+                                <div class="form-group">
+                                    <label for="prix_achat">Prix d'Achat (FCFA)</label>
+                                    <input type="number" id="prix_achat" name="prix_achat" step="0.01" min="0" required value="<?php echo htmlspecialchars($_POST['prix_achat'] ?? ''); ?>">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="prix">Prix de Vente (FCFA)</label>
+                                    <input type="number" id="prix" name="prix" step="0.01" min="0" required value="<?php echo htmlspecialchars($_POST['prix'] ?? ''); ?>">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="quantite_stock">Quantité en Stock</label>
+                                    <input type="number" id="quantite_stock" name="quantite_stock" min="0" required value="<?php echo htmlspecialchars($_POST['quantite_stock'] ?? ''); ?>">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="numero_de_lot">Numéro de Lot</label>
+                                    <input type="text" id="numero_de_lot" name="numero_de_lot" value="<?php echo htmlspecialchars($_POST['numero_de_lot'] ?? ''); ?>">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="image">Image du Produit</label>
+                                    <input type="file" id="image" name="image" accept="image/*">
+                                </div>
                             </div>
+                        </div>
+
+                        <!-- Champs pleine largeur -->
+                        <div class="form-fullwidth">
                             <div class="form-group">
-                                <label for="description">Description:</label>
-                                <textarea id="description" name="description" rows="5" required><?php echo htmlspecialchars($_POST['description'] ?? ''); ?></textarea>
+                                <label for="description">Description</label>
+                                <textarea id="description" name="description" rows="6" required><?php echo htmlspecialchars($_POST['description'] ?? ''); ?></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="prix_achat">Prix d'Achat (FCFA):</label>
-                                <input type="number" id="prix_achat" name="prix_achat" step="0.01" min="0" required value="<?php echo htmlspecialchars($_POST['prix_achat'] ?? ''); ?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="prix">Prix de Vente (FCFA):</label>
-                                <input type="number" id="prix" name="prix" step="0.01" min="0" required value="<?php echo htmlspecialchars($_POST['prix'] ?? ''); ?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="categorie">Catégorie :</label>
-                                <select name="categorie_id" id="categorie" required>
-                                    <option value="">Sélectionner une catégorie</option>
-                                    <?php foreach($categories_sql as $categorie): ?>
-                                        <option value="<?= htmlspecialchars($categorie['id']); ?>" <?= (isset($_POST['categorie_id']) && $_POST['categorie_id'] == $categorie['id']) ? 'selected' : ''; ?>>
-                                            <?= htmlspecialchars($categorie['nom']); ?>
-                                        </option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="numero_de_lot">Numéro de Lot:</label>
-                                <input type="text" id="numero_de_lot" name="numero_de_lot" value="<?php echo htmlspecialchars($_POST['numero_de_lot'] ?? ''); ?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="quantite_stock">Quantité en Stock:</label>
-                                <input type="number" id="quantite_stock" name="quantite_stock" min="0" required value="<?php echo htmlspecialchars($_POST['quantite_stock'] ?? ''); ?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="image">Image du Produit:</label>
-                                <input type="file" id="image" name="image" accept="image/*">
-                            </div>
+
                             <div class="form-actions">
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Ajouter le Produit</button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-plus"></i> Ajouter le Produit
+                                </button>
                                 <a href="produits.php" class="btn btn-secondary">Annuler</a>
                             </div>
                         </div>

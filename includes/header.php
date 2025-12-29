@@ -49,7 +49,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
             </a>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="<?php echo BASE_URL; ?>index.php" class="<?php echo ($current_page == 'index.php') ? 'active' : ''; ?>">Accueil</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>acceuil.php" class="<?php echo ($current_page == 'index.php') ? 'active' : ''; ?>">Accueil</a></li>
                     <li><a href="<?php echo BASE_URL; ?>boutique.php" class="<?php echo ($current_page == 'boutique.php') ? 'active' : ''; ?>">Boutique</a></li>
                     <li><a href="<?php echo BASE_URL; ?>panier.php" class="<?php echo ($current_page == 'panier.php') ? 'active' : ''; ?>">Panier</a></li>
                 </ul>
